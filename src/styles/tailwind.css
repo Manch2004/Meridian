@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-bg: #0a0b0d;
+  --color-bg-elevated: #101216;
+  --color-accent: #3d5afe;
+  --color-accent-hover: #5a74ff;
+  --color-accent-soft: #3d5afe1a;
+
+  --color-text-primary: #f5f6f8;
+  --color-text-secondary: #a6acbb;
+  --color-text-muted: #6b7280;
+
+  --color-border: #ffffff1a;
+  --color-border-strong: #ffffff33;
+
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* Animations */
+  --animate-dash: dash 8s linear infinite;
+  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes orb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-rotate,
+  .animate-dash,
+  .animate-pulse-slow {
+    animation: none !important;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  /*
+   * Card depth system: a top-left "sheen" gradient fill, a gradient border
+   * (light at the top, fading to transparent) via a masked ::before ring,
+   * and a very subtle noise texture via ::after. Both pseudo-elements sit
+   * behind the card's real content (isolate + negative z-index) so they
+   * never interfere with readability.
+   */
+  .glass-card {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background-image:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.045) 0%, transparent 55%),
+      linear-gradient(
+        color-mix(in srgb, var(--color-bg-elevated) 60%, transparent),
+        color-mix(in srgb, var(--color-bg-elevated) 60%, transparent)
+      );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-accent) 32%, white) 0%,
+      color-mix(in srgb, var(--color-border-strong) 55%, transparent) 45%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: background 0.3s ease;
+  }
+
+  .glass-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .glass-card:hover::before,
+  .glass-card.is-active::before {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-accent) 70%, white) 0%,
+      var(--color-border-strong) 45%,
+      transparent 100%
+    );
+  }
+
+  /* Opt-out for cards that need their own real border style (e.g. a dashed
+     "planned" state) instead of the gradient ring. */
+  .glass-card--plain-border::before {
+    content: none;
+  }
+
+  /* Soft accent glow behind a card's icon, evoking the MeridianOrb glow. */
+  .card-icon-glow {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .card-icon-glow::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+    z-index: -1;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-accent) 18%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(14px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+  }
+
+  .glass-card:hover .card-icon-glow::before {
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-accent) 30%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(18px);
+  }
+
+  /* Small decorative accent dot in a card's top-right corner. */
+  .card-corner-dot {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: -1;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    opacity: 0.3;
+    box-shadow: 0 0 10px 1px color-mix(in srgb, var(--color-accent) 45%, transparent);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .glass-card::after {
+      opacity: 0.02;
+    }
+
+    .card-icon-glow::before {
+      inset: -8px;
+      filter: blur(8px);
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .orb-rotate {
+    animation: orb-spin var(--orb-spin-duration, 120s) linear infinite;
+  }
+}

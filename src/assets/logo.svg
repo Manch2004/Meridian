@@ -1,0 +1,17 @@
+<!--
+  Placeholder brand mark — replace this file with the real Meridian logo
+  once a brand asset exists. Keeping the same filename/path means no
+  import paths need to change elsewhere when it's swapped in.
+
+  Not currently wired into the Header — the header intentionally uses a
+  plain text wordmark until a real logo is available (see Header.jsx).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <path
+    d="M9 24V8l7 8 7-8v16"
+    stroke="#3d5afe"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

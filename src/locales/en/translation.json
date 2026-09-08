@@ -1,0 +1,226 @@
+{
+  "common": {
+    "comingSoon": "Coming soon",
+    "toggleMenu": "Toggle menu",
+    "learnMore": "Learn More",
+    "seeDetails": "See details"
+  },
+  "header": {
+    "logo": "Meridian",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "howItWorks": "How It Works",
+      "fund": "Fund",
+      "technology": "Technology",
+      "roadmap": "Roadmap",
+      "token": "Token",
+      "faq": "FAQ"
+    },
+    "openApp": "Open App"
+  },
+  "hero": {
+    "headline": "Expert-Managed Investing in Digital Assets — Backed by Technology",
+    "subheadline": "A transparent, professionally managed fund built for digital asset markets.",
+    "cta": "Open App",
+    "scrollHint": "Scroll to explore"
+  },
+  "home": {
+    "aboutPreview": "An AI-powered fund trading crypto through exchanges and arbitrage.",
+    "howItWorksPreview": "Five simple steps from access to portfolio.",
+    "technologyPreview": "Four technologies power the fund."
+  },
+  "about": {
+    "heading": "About Meridian",
+    "intro": "Meridian is an AI-powered fund trading crypto markets through exchanges and arbitrage. The team manages everything — you never trade yourself.",
+    "pillars": {
+      "ai": {
+        "title": "AI",
+        "description": "AI models support the fund's research and decision-making process, helping identify patterns across markets."
+      },
+      "exchanges": {
+        "title": "Exchanges",
+        "description": "The fund operates across multiple exchanges, diversifying execution and market access."
+      },
+      "arbitrage": {
+        "title": "Arbitrage",
+        "description": "Arbitrage strategies help the fund capture pricing inefficiencies across markets."
+      }
+    }
+  },
+  "howItWorks": {
+    "heading": "How It Works",
+    "steps": {
+      "access": {
+        "title": "Access",
+        "description": "Access by invitation only."
+      },
+      "deposit": {
+        "title": "Deposit",
+        "description": "Deposit funds into Meridian."
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "description": "Your deposit gets confirmed."
+      },
+      "units": {
+        "title": "Units",
+        "description": "Participation tracked in Units."
+      },
+      "portfolio": {
+        "title": "Portfolio",
+        "description": "See your full portfolio."
+      }
+    }
+  },
+  "fund": {
+    "heading": "Fund Overview",
+    "demoData": "Demo Data — for illustration purposes only, not real fund performance",
+    "chartTitle": "Unit Price History",
+    "chartTooltipUnitPrice": "Unit Price",
+    "stats": {
+      "unitPrice": {
+        "label": "Unit Price"
+      },
+      "fundValue": {
+        "label": "Fund Value"
+      },
+      "totalUnits": {
+        "label": "Total Units"
+      },
+      "activeSince": {
+        "label": "Active Since",
+        "value": "Jan 2024"
+      }
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug"
+    }
+  },
+  "technology": {
+    "heading": "Technology",
+    "intro": "A few core technologies power the fund.",
+    "pillars": {
+      "ai": {
+        "title": "AI",
+        "description": "AI helps analyze markets and guide decisions."
+      },
+      "arbitrage": {
+        "title": "Arbitrage",
+        "description": "The fund profits from price gaps between markets."
+      },
+      "exchanges": {
+        "title": "Exchanges",
+        "description": "Meridian trades across several major crypto exchanges."
+      },
+      "riskManagement": {
+        "title": "Risk Management",
+        "description": "Built-in safeguards help protect the fund's capital."
+      }
+    }
+  },
+  "token": {
+    "heading": "Future Token Ecosystem",
+    "disclaimer": "Tokenomics, conversion terms and reward mechanisms are not yet finalized and are subject to change.",
+    "intro": "A possible future token, planned to connect with today's participation system.",
+    "concepts": {
+      "futureToken": {
+        "title": "Future Meridian Token",
+        "description": "A future Meridian token may be introduced."
+      },
+      "tokenAllocation": {
+        "title": "Token Allocation",
+        "description": "Distribution details are still being worked out."
+      },
+      "earlyParticipantRewards": {
+        "title": "Early Participant Rewards",
+        "description": "Early participants may receive rewards — details pending."
+      }
+    },
+    "diagram": {
+      "current": "Current Participation (Units)",
+      "planned": "Planned",
+      "future": "Future Token Ecosystem"
+    }
+  },
+  "roadmap": {
+    "heading": "Roadmap",
+    "intro": "Meridian's development is built across clear phases, from the fund's core infrastructure to a future token ecosystem.",
+    "status": {
+      "inProgress": "In Progress",
+      "planned": "Planned"
+    },
+    "phases": {
+      "foundation": {
+        "title": "Foundation",
+        "description": "Core fund infrastructure, development of AI and arbitrage systems, invite-based early access."
+      },
+      "growth": {
+        "title": "Growth",
+        "description": "Expanding the participant base, adding exchange integrations, developing the transparency dashboard."
+      },
+      "ecosystemExpansion": {
+        "title": "Ecosystem Expansion",
+        "description": "Deepening risk management systems, integrating new strategies, expanded reporting."
+      },
+      "tokenEcosystem": {
+        "title": "Token Ecosystem",
+        "description": "Development of the future Meridian Token and its integration with the current participation system."
+      },
+      "beyond": {
+        "title": "Beyond",
+        "description": "Long-term vision, additional financial instruments and functionality."
+      }
+    }
+  },
+  "faq": {
+    "heading": "FAQ",
+    "items": {
+      "whatIsMeridian": {
+        "question": "What is Meridian?",
+        "answer": "Meridian is an investment fund that operates across crypto markets, exchanges, and arbitrage strategies using AI technologies."
+      },
+      "howToParticipate": {
+        "question": "How do I participate?",
+        "answer": "Participation is available by invitation. After gaining access, a deposit is made, and once confirmed, you receive participation in Meridian."
+      },
+      "whatIsUnit": {
+        "question": "What is a Unit?",
+        "answer": "A Unit is Meridian's calculation unit for participation, reflecting your share in the fund."
+      },
+      "howWithdrawalWorks": {
+        "question": "How does withdrawal work?",
+        "answer": "Withdrawing funds is subject to a 30-day lock-up period."
+      },
+      "doITradeMyself": {
+        "question": "Do I trade myself?",
+        "answer": "No. The fund is managed entirely by the Meridian team — participants do not trade on their own."
+      },
+      "isThereToken": {
+        "question": "Is there a token?",
+        "answer": "Meridian is developing a future token ecosystem that is planned to connect with the current participation system over time. Final terms have not yet been confirmed."
+      },
+      "areProfitsGuaranteed": {
+        "question": "Are profits guaranteed?",
+        "answer": "No. Financial investments involve risk, and results are never guaranteed."
+      },
+      "howToContact": {
+        "question": "How can I contact Meridian?",
+        "answer": "Through Meridian's Telegram channel (link in the footer)."
+      }
+    }
+  },
+  "footer": {
+    "telegram": "Telegram",
+    "openApp": "Open App",
+    "disclaimer": "Meridian is an investment fund. Participation involves risk. Past or projected performance is not guaranteed.",
+    "copyright": "© {{year}} Meridian. All rights reserved."
+  }
+}
