@@ -13,7 +13,7 @@ function DisclaimerBadge() {
   const { t } = useTranslation();
 
   return (
-    <span className="inline-flex items-center gap-2 rounded-md border border-accent/30 bg-accent-soft px-3.5 py-1.5 text-left text-sm font-medium text-accent">
+    <span className="inline-flex items-center gap-2 rounded-md border border-border-default bg-bg-card px-3.5 py-1.5 text-left text-sm font-medium text-text-dim">
       <AlertTriangle className="h-4 w-4 flex-shrink-0" strokeWidth={2} />
       {t("token.disclaimer")}
     </span>
@@ -28,17 +28,15 @@ function ConceptCard({ conceptKey, Icon, index }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 120}ms` }}
-      className={`glass-card reveal p-5 transition-colors duration-300 ${
-        isVisible ? "reveal-visible" : ""
-      }`}
+      className={`gold-card reveal p-5 ${isVisible ? "reveal-visible" : ""}`}
     >
-      <div className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-bg-elevated text-text-secondary">
+      <div className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-gold-primary/20 bg-gold-primary/12 text-gold-primary">
         <Icon className="h-4 w-4" strokeWidth={1.75} />
       </div>
-      <h3 className="mt-4 text-base font-semibold text-text-primary">
+      <h3 className="mt-4 text-base font-semibold text-text-main">
         {t(`token.concepts.${conceptKey}.title`)}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+      <p className="mt-2 text-sm leading-relaxed text-text-dim">
         {t(`token.concepts.${conceptKey}.description`)}
       </p>
     </div>
@@ -56,8 +54,8 @@ function ConnectionDiagram() {
         isVisible ? "reveal-visible" : ""
       }`}
     >
-      <div className="glass-card flex-1 px-6 py-6 text-center">
-        <p className="text-sm font-semibold text-text-primary">{t("token.diagram.current")}</p>
+      <div className="gold-card flex-1 px-6 py-6 text-center">
+        <p className="text-sm font-semibold text-text-main">{t("token.diagram.current")}</p>
       </div>
 
       <div className="flex flex-shrink-0 flex-col items-center gap-2 sm:w-28">
@@ -68,8 +66,8 @@ function ConnectionDiagram() {
         <ArrowRight className="h-4 w-4 rotate-90 text-text-muted sm:rotate-0" strokeWidth={2} />
       </div>
 
-      <div className="glass-card glass-card--plain-border flex-1 border-dashed border-border-strong px-6 py-6 text-center">
-        <p className="text-sm font-semibold text-text-primary">{t("token.diagram.future")}</p>
+      <div className="flex-1 rounded-md border border-dashed border-border-strong bg-bg-card px-6 py-6 text-center">
+        <p className="text-sm font-semibold text-text-main">{t("token.diagram.future")}</p>
       </div>
     </div>
   );

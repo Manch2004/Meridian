@@ -23,7 +23,7 @@ function OpenAppButton({ className = "" }) {
       aria-disabled="true"
       title={t("common.comingSoon")}
       onClick={(e) => e.preventDefault()}
-      className={`inline-flex cursor-not-allowed items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white opacity-80 transition-opacity hover:opacity-100 ${className}`}
+      className={`inline-flex cursor-not-allowed items-center justify-center rounded-md bg-gold-primary px-4 py-2 text-sm font-semibold text-bg-primary transition-colors hover:bg-gold-light ${className}`}
     >
       {t("header.openApp")}
     </a>
@@ -43,25 +43,25 @@ export default function Header() {
   }, []);
 
   const navLinkClassName = ({ isActive }) =>
-    `whitespace-nowrap text-sm transition-colors hover:text-text-primary ${
-      isActive ? "text-accent" : "text-text-secondary"
+    `whitespace-nowrap text-sm transition-colors hover:text-text-main ${
+      isActive ? "text-gold-primary" : "text-text-dim"
     }`;
 
   const mobileNavLinkClassName = ({ isActive }) =>
-    `text-base transition-colors hover:text-text-primary ${
-      isActive ? "text-accent" : "text-text-secondary"
+    `text-base transition-colors hover:text-text-main ${
+      isActive ? "text-gold-primary" : "text-text-dim"
     }`;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled
-          ? "border-border bg-bg/90 backdrop-blur-md"
+          ? "border-border-default bg-bg-secondary/90 backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="text-xl font-bold tracking-tight text-text-primary">
+        <Link to="/" className="text-xl font-bold tracking-tight text-text-main">
           {t("header.logo")}
         </Link>
 
@@ -83,7 +83,7 @@ export default function Header() {
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={t("common.toggleMenu")}
           aria-expanded={menuOpen}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-text-primary xl:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-default text-text-main xl:hidden"
         >
           {menuOpen ? (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
@@ -98,7 +98,7 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-border bg-bg/95 px-6 py-6 backdrop-blur-md xl:hidden">
+        <div className="border-t border-border-default bg-bg-secondary/95 px-6 py-6 backdrop-blur-md xl:hidden">
           <nav className="flex flex-col gap-4">
             {NAV_ITEMS.map((item) => (
               <NavLink

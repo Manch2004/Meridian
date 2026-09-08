@@ -15,10 +15,11 @@ function ChartTooltip({ active, payload, label }) {
   if (!active || !payload || !payload.length) return null;
 
   return (
-    <div className="glass-card px-3 py-2 text-sm shadow-lg">
-      <p className="text-text-secondary">{label}</p>
-      <p className="mt-1 font-mono text-text-primary">
-        {t("fund.chartTooltipUnitPrice")}: ${payload[0].value.toFixed(2)}
+    <div className="gold-card px-3 py-2 text-sm shadow-lg">
+      <p className="text-text-dim">{label}</p>
+      <p className="mt-1 font-mono text-text-main">
+        {t("fund.chartTooltipUnitPrice")}:{" "}
+        <span className="text-gold-primary">${payload[0].value.toFixed(2)}</span>
       </p>
     </div>
   );
@@ -36,30 +37,30 @@ export default function FundChart() {
     <div className="h-72 w-full sm:h-80">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData} margin={{ top: 10, right: 12, left: -8, bottom: 0 }}>
-          <CartesianGrid stroke="#ffffff14" vertical={false} />
+          <CartesianGrid stroke="#272b322e" vertical={false} />
           <XAxis
             dataKey="label"
-            stroke="#ffffff1a"
-            tick={{ fill: "#a6acbb", fontSize: 12, fontFamily: "Inter, sans-serif" }}
+            stroke="#272b321a"
+            tick={{ fill: "#9a9fa8", fontSize: 12, fontFamily: "Inter, sans-serif" }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            stroke="#ffffff1a"
-            tick={{ fill: "#a6acbb", fontSize: 12, fontFamily: "JetBrains Mono, monospace" }}
+            stroke="#272b321a"
+            tick={{ fill: "#9a9fa8", fontSize: 12, fontFamily: "JetBrains Mono, monospace" }}
             tickLine={false}
             axisLine={false}
             domain={["dataMin - 0.02", "dataMax + 0.02"]}
             tickFormatter={(value) => `$${value.toFixed(2)}`}
             width={56}
           />
-          <Tooltip content={<ChartTooltip />} cursor={{ stroke: "#3d5afe4d", strokeWidth: 1 }} />
+          <Tooltip content={<ChartTooltip />} cursor={{ stroke: "#c9a2274d", strokeWidth: 1 }} />
           <Line
             type="monotone"
             dataKey="unitPrice"
-            stroke="#3d5afe"
+            stroke="#c9a227"
             strokeWidth={2}
-            dot={{ r: 3, fill: "#3d5afe", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#c9a227", strokeWidth: 0 }}
             activeDot={{ r: 5 }}
           />
         </LineChart>

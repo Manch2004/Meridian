@@ -26,7 +26,7 @@ function DemoDataBadge({ size = "md" }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-md border border-accent/30 bg-accent-soft font-medium text-accent ${
+      className={`inline-flex items-center gap-2 rounded-md border border-border-default bg-bg-card font-medium text-text-dim ${
         isSmall ? "px-2.5 py-1 text-xs" : "px-3.5 py-1.5 text-sm"
       }`}
     >
@@ -45,14 +45,12 @@ function StatCard({ statKey, value, formatter, index }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 120}ms` }}
-      className={`glass-card reveal p-6 transition-all duration-300 hover:shadow-[0_0_32px_-12px_rgba(61,90,254,0.45)] ${
-        isVisible ? "reveal-visible" : ""
-      }`}
+      className={`gold-card reveal p-6 ${isVisible ? "reveal-visible" : ""}`}
     >
-      <p className="text-xs font-medium uppercase tracking-widest text-text-secondary">
+      <p className="text-xs font-medium uppercase tracking-widest text-text-dim">
         {t(`fund.stats.${statKey}.label`)}
       </p>
-      <p className="mt-3 font-mono text-2xl font-semibold text-text-primary sm:text-3xl">
+      <p className="mt-3 font-mono text-2xl font-semibold text-gold-primary sm:text-3xl">
         {typeof value === "number" ? formatter(animated) : t(`fund.stats.${statKey}.value`)}
       </p>
     </div>
@@ -105,7 +103,7 @@ export default function Fund() {
             <h3 className="text-lg font-semibold text-text-primary">{t("fund.chartTitle")}</h3>
             <DemoDataBadge size="sm" />
           </div>
-          <div className="glass-card p-4 sm:p-6">
+          <div className="rounded-md border border-border-default p-4 sm:p-6">
             <FundChart />
           </div>
         </div>

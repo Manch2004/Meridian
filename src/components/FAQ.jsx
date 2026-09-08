@@ -12,11 +12,9 @@ function FAQItem({ item, index, isOpen, onToggle }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 120}ms` }}
-      className={`glass-card reveal overflow-hidden transition-all duration-300 ${
-        isOpen
-          ? "is-active shadow-[0_0_32px_-12px_rgba(61,90,254,0.5)]"
-          : "hover:shadow-[0_0_32px_-12px_rgba(61,90,254,0.45)]"
-      } ${isVisible ? "reveal-visible" : ""}`}
+      className={`gold-card reveal overflow-hidden ${isOpen ? "is-active" : ""} ${
+        isVisible ? "reveal-visible" : ""
+      }`}
     >
       <button
         type="button"
@@ -24,12 +22,12 @@ function FAQItem({ item, index, isOpen, onToggle }) {
         aria-expanded={isOpen}
         className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
       >
-        <span className="text-base font-semibold text-text-primary">
+        <span className="text-base font-semibold text-text-main">
           {t(`faq.items.${item.key}.question`)}
         </span>
         <ChevronDown
-          className={`h-5 w-5 flex-shrink-0 text-accent transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
+          className={`h-5 w-5 flex-shrink-0 transition-all duration-300 ${
+            isOpen ? "rotate-180 text-gold-primary" : "text-text-dim"
           }`}
           strokeWidth={1.75}
         />
@@ -40,7 +38,7 @@ function FAQItem({ item, index, isOpen, onToggle }) {
         style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
       >
         <div className="overflow-hidden">
-          <p className="px-6 pb-5 text-sm leading-relaxed text-text-secondary">
+          <p className="px-6 pb-5 text-sm leading-relaxed text-text-dim">
             {t(`faq.items.${item.key}.answer`)}
           </p>
         </div>

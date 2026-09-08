@@ -21,7 +21,7 @@ export default function Hero() {
               aria-disabled="true"
               title={t("common.comingSoon")}
               onClick={(e) => e.preventDefault()}
-              className="inline-flex cursor-not-allowed items-center justify-center rounded-md bg-accent px-6 py-3 text-base font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
+              className="inline-flex cursor-not-allowed items-center justify-center rounded-md bg-gold-primary px-6 py-3 text-base font-semibold text-bg-primary transition-colors hover:bg-gold-light"
             >
               {t("hero.cta")}
             </a>

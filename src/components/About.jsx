@@ -17,18 +17,16 @@ function PillarCard({ pillarKey, Icon, index }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 120}ms` }}
-      className={`glass-card reveal group p-6 transition-all duration-300 hover:shadow-[0_0_32px_-12px_rgba(61,90,254,0.45)] ${
-        isVisible ? "reveal-visible" : ""
-      }`}
+      className={`gold-card reveal group p-6 ${isVisible ? "reveal-visible" : ""}`}
     >
-      <span className="card-corner-dot" aria-hidden="true" />
-      <div className="card-icon-glow inline-flex h-11 w-11 items-center justify-center rounded-sm border border-border bg-accent-soft text-accent transition-colors duration-300 group-hover:border-accent/50">
+      <span className="gold-corner-dot" aria-hidden="true" />
+      <div className="gold-icon-glow inline-flex h-11 w-11 items-center justify-center rounded-sm border border-gold-primary/20 bg-gold-primary/12 text-gold-primary transition-colors duration-300 group-hover:border-gold-primary/40">
         <Icon className="h-5 w-5" strokeWidth={1.75} />
       </div>
-      <h3 className="mt-4 text-base font-semibold text-text-primary">
+      <h3 className="mt-4 text-base font-semibold text-text-main">
         {t(`about.pillars.${pillarKey}.title`)}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+      <p className="mt-2 text-sm leading-relaxed text-text-dim">
         {t(`about.pillars.${pillarKey}.description`)}
       </p>
     </div>

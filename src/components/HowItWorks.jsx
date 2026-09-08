@@ -22,10 +22,10 @@ function Step({ stepKey, Icon, index }) {
         isVisible ? "reveal-visible" : ""
       }`}
     >
-      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-md border border-border-strong bg-bg-elevated text-accent">
+      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-md border border-gold-primary/20 bg-gold-primary/12 text-gold-primary">
         <Icon className="h-6 w-6" strokeWidth={1.75} />
       </div>
-      <span className="mt-4 font-mono text-xs text-accent">0{index + 1}</span>
+      <span className="mt-4 font-mono text-xs text-gold-primary">0{index + 1}</span>
       <h3 className="mt-2 text-base font-semibold text-text-primary">
         {t(`howItWorks.steps.${stepKey}.title`)}
       </h3>
@@ -59,7 +59,7 @@ export default function HowItWorks() {
         >
           <div className="pointer-events-none absolute inset-x-0 top-7 hidden h-px bg-border md:block">
             <div
-              className={`h-full bg-accent transition-transform duration-[1400ms] ease-out ${
+              className={`h-full bg-gold-primary transition-transform duration-[1400ms] ease-out ${
                 lineVisible ? "scale-x-100" : "scale-x-0"
               }`}
               style={{ transformOrigin: "left" }}

@@ -38,14 +38,15 @@ const NETWORK_EDGES = [
 /**
  * Reusable abstract wireframe-sphere / network graphic used as decorative
  * visual identity across sections. Pure SVG, no dependencies. Colors read
- * from the `color` prop (defaults to the accent design token) so it always
- * tracks the theme instead of a hardcoded hex value.
+ * from the `color`/`dotColor` props (default to the gold design tokens) so
+ * they always track the theme instead of a hardcoded hex value.
  */
 export default function MeridianOrb({
   size = 600,
   opacity = 1,
   variant = "sphere",
-  color = "var(--color-accent)",
+  color = "var(--color-gold-primary)",
+  dotColor = "var(--color-gold-light)",
   animate = true,
   speed = 120,
   className = "",
@@ -142,14 +143,14 @@ export default function MeridianOrb({
           </>
         )}
 
-        <circle cx="300" cy="300" r="4.5" fill={color} />
+        <circle cx="300" cy="300" r="4.5" fill={dotColor} />
         {nodes.map(([cx, cy], i) => (
           <circle
             key={`${cx}-${cy}`}
             cx={cx}
             cy={cy}
             r="4"
-            fill={color}
+            fill={dotColor}
             className={animate ? "animate-pulse-slow" : ""}
             style={{ animationDelay: `${i * 0.4}s` }}
           />

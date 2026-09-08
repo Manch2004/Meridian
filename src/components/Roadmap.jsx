@@ -20,7 +20,7 @@ function PhaseRow({ phase, index }) {
       <div
         className={`relative z-10 col-start-1 row-start-1 flex h-12 w-12 flex-shrink-0 flex-col items-center justify-center rounded-full border bg-bg-elevated md:col-start-2 ${
           isActive
-            ? "border-accent/60 text-accent"
+            ? "border-gold-primary/60 text-gold-primary"
             : "border-border-strong text-text-secondary"
         }`}
       >
@@ -41,23 +41,21 @@ function PhaseRow({ phase, index }) {
         }`}
       >
         <div
-          className={`glass-card inline-block w-full p-6 text-left transition-colors duration-300 ${
-            isActive ? "is-active" : ""
-          }`}
+          className={`gold-card inline-block w-full p-6 text-left ${isActive ? "is-active" : ""}`}
         >
           <span
             className={`mb-3 inline-flex items-center rounded-sm border px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide ${
               isActive
-                ? "border-accent/30 bg-accent-soft text-accent"
+                ? "border-gold-primary/30 bg-gold-primary/10 text-gold-primary"
                 : "border-border text-text-muted"
             }`}
           >
             {t(`roadmap.status.${phase.status}`)}
           </span>
-          <h3 className="text-base font-semibold text-text-primary">
+          <h3 className="text-base font-semibold text-text-main">
             {t(`roadmap.phases.${phase.key}.title`)}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+          <p className="mt-2 text-sm leading-relaxed text-text-dim">
             {t(`roadmap.phases.${phase.key}.description`)}
           </p>
         </div>
@@ -87,7 +85,7 @@ export default function Roadmap() {
         <div ref={lineRef} className="relative mt-16">
           <div className="pointer-events-none absolute left-6 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-1/2">
             <div
-              className={`w-full origin-top bg-accent/50 transition-transform duration-[1400ms] ease-out ${
+              className={`w-full origin-top bg-gold-primary/50 transition-transform duration-[1400ms] ease-out ${
                 lineVisible ? "h-full scale-y-100" : "h-full scale-y-0"
               }`}
             />
