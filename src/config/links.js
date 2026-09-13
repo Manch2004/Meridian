@@ -10,3 +10,8 @@ export const OPEN_APP_URL = "#"; // TODO: replace with real URL
 // ID meant to be called from the browser (Formspree's own integration
 // model) — it is not a secret and carries no account credentials.
 export const SUPPORT_FORM_ENDPOINT = "https://formspree.io/f/mzebldnw";
+
+// Base URL of the meridian-ai-backend service (sibling project). Set via
+// VITE_API_URL in .env — localhost for dev, the deployed backend URL in
+// production.
+export const AI_CHAT_API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";

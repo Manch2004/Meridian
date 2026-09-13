@@ -3,7 +3,8 @@
     "comingSoon": "Շուտով",
     "toggleMenu": "Բացել/փակել ընտրացանկը",
     "learnMore": "Իմանալ ավելին",
-    "seeDetails": "Մանրամասներ"
+    "seeDetails": "Մանրամասներ",
+    "securityWarning": "Meridian-ի թիմը երբեք չի հարցնի ձեր password-ը, private key-ը կամ seed phrase-ը՝ ոչ email-ով, ոչ support ticket-ում, ոչ որևէ այլ տեղ։ Երբեք մի կիսվեք դրանցով ոչ ոքի հետ։"
   },
   "header": {
     "logo": "Meridian",
@@ -30,7 +31,11 @@
         "roadmap": "Ճանապարհային Քարտեզ"
       }
     },
-    "openApp": "Բացել հավելվածը"
+    "openApp": "Բացել հավելվածը",
+    "login": "Մուտք",
+    "signOut": "Ելք",
+    "myTickets": "Իմ Ticket-երը",
+    "admin": "Admin"
   },
   "hero": {
     "headline": "Փորձագետների կողմից կառավարվող ներդրումներ՝ ապահովված տեխնոլոգիայով",
@@ -462,6 +467,11 @@
   "support": {
     "heading": "Աջակցություն",
     "intro": "Հարցեր կամ մտահոգություններ Meridian-ի վերաբերյալ։ Մենք այստեղ ենք՝ օգնելու համար։",
+    "ticketCta": {
+      "prompt": "Պետք է հետևելի support ticket։",
+      "description": "Բացեք պաշտոնական ticket և հետևեք դրա կարգավիճակին Իմ Ticket-երում։",
+      "link": "Բացել ticket"
+    },
     "form": {
       "fields": {
         "name": { "label": "Անուն", "placeholder": "Ձեր անունը" },
@@ -487,6 +497,170 @@
       "link": "Բացել Telegram-ը"
     },
     "faqNote": "Փնտրում եք արագ պատասխաններ։ Դիտեք մեր ՀՏՀ բաժինը"
+  },
+  "auth": {
+    "login": {
+      "heading": "Մուտք",
+      "intro": "Բարի վերադարձ։ Մուտք գործեք ձեր Meridian հաշիվ։",
+      "fields": {
+        "email": {
+          "label": "Էլ. հասցե",
+          "placeholder": "you@example.com"
+        },
+        "password": {
+          "label": "Գաղտնաբառ",
+          "placeholder": "Ձեր գաղտնաբառը"
+        }
+      },
+      "errors": {
+        "emailRequired": "Խնդրում ենք մուտքագրել ձեր էլ. հասցեն։",
+        "emailInvalid": "Խնդրում ենք մուտքագրել վավեր էլ. հասցե։",
+        "passwordRequired": "Խնդրում ենք մուտքագրել ձեր գաղտնաբառը։",
+        "invalidCredentials": "Սխալ էլ. հասցե կամ գաղտնաբառ։",
+        "generic": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
+      },
+      "submit": "Մուտք",
+      "submitting": "Մուտք է գործվում...",
+      "noAccount": "Հաշիվ չունե՞ք։",
+      "signupLink": "Գրանցվել"
+    },
+    "signup": {
+      "heading": "Ստեղծել հաշիվ",
+      "intro": "Ստեղծեք Meridian հաշիվ՝ ձեր support ticket-երը կառավարելու համար։",
+      "fields": {
+        "email": {
+          "label": "Էլ. հասցե",
+          "placeholder": "you@example.com"
+        },
+        "password": {
+          "label": "Գաղտնաբառ",
+          "placeholder": "Ստեղծեք գաղտնաբառ"
+        },
+        "confirmPassword": {
+          "label": "Հաստատեք գաղտնաբառը",
+          "placeholder": "Կրկին մուտքագրեք գաղտնաբառը"
+        }
+      },
+      "errors": {
+        "emailRequired": "Խնդրում ենք մուտքագրել ձեր էլ. հասցեն։",
+        "emailInvalid": "Խնդրում ենք մուտքագրել վավեր էլ. հասցե։",
+        "passwordRequired": "Խնդրում ենք մուտքագրել գաղտնաբառ։",
+        "passwordTooShort": "Գաղտնաբառը պետք է լինի առնվազն {{count}} նիշ։",
+        "passwordMismatch": "Գաղտնաբառերը չեն համընկնում։",
+        "userExists": "Այս էլ. հասցեով հաշիվ արդեն գոյություն ունի։",
+        "generic": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
+      },
+      "submit": "Գրանցվել",
+      "submitting": "Հաշիվը ստեղծվում է...",
+      "confirmEmail": "Հաշիվը ստեղծվեց — ստուգեք ձեր էլ. փոստը՝ այն հաստատելու համար, նախքան մուտք գործելը։",
+      "haveAccount": "Արդեն հաշիվ ունե՞ք։",
+      "loginLink": "Մուտք գործել"
+    }
+  },
+  "myTickets": {
+    "categories": {
+      "accountVerification": "Հաշիվ և Ստուգում",
+      "deposit": "Ավանդ",
+      "withdrawal": "Դուրսբերում",
+      "staking": "Staking",
+      "bonusesPoints": "Բոնուսներ և Միավորներ",
+      "referralSystem": "Ռեֆերալ Համակարգ",
+      "meridianFund": "Meridian Fund",
+      "technicalProblems": "Տեխնիկական Խնդիրներ",
+      "security": "Անվտանգություն",
+      "other": "Այլ"
+    },
+    "statuses": {
+      "open": "Բաց",
+      "inProgress": "Ընթացքում",
+      "waitingForUser": "Սպասվում է User-ից",
+      "resolved": "Լուծված",
+      "closed": "Փակված"
+    },
+    "list": {
+      "heading": "Իմ Ticket-երը",
+      "intro": "Հետևեք ձեր support ticket-երի կարգավիճակին և պատասխանեք թիմին։",
+      "newTicket": "Նոր Ticket",
+      "loading": "Ձեր ticket-երը բեռնվում են...",
+      "empty": "Դուք դեռ support ticket չեք բացել։",
+      "error": "Ինչ-որ բան այն չէր ticket-երը բեռնելիս։ Խնդրում ենք կրկին փորձել։"
+    },
+    "new": {
+      "heading": "Բացել Support Ticket",
+      "intro": "Պատմեք, թե ինչ է կատարվում, և մենք կպատասխանենք այստեղ։",
+      "fields": {
+        "category": { "label": "Կատեգորիա" },
+        "meridianUsername": { "label": "Meridian Username (ոչ պարտադիր)", "placeholder": "Ձեր Meridian username-ը" },
+        "name": { "label": "Անուն (ոչ պարտադիր)", "placeholder": "Ձեր անունը" },
+        "email": { "label": "Էլ. հասցե", "placeholder": "you@example.com" },
+        "message": { "label": "Հաղորդագրություն", "placeholder": "Մանրամասն նկարագրեք ձեր խնդիրը" }
+      },
+      "errors": {
+        "emailRequired": "Խնդրում ենք մուտքագրել ձեր էլ. հասցեն։",
+        "emailInvalid": "Խնդրում ենք մուտքագրել վավեր էլ. հասցե։",
+        "messageRequired": "Խնդրում ենք մուտքագրել հաղորդագրություն։",
+        "messageTooShort": "Հաղորդագրությունը պետք է լինի առնվազն {{count}} նիշ։",
+        "generic": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
+      },
+      "submit": "Ուղարկել Ticket",
+      "submitting": "Ուղարկվում է..."
+    },
+    "detail": {
+      "back": "Վերադառնալ Իմ Ticket-երին",
+      "loading": "Ticket-ը բեռնվում է...",
+      "notFound": "Ticket-ը չի գտնվել։",
+      "error": "Ինչ-որ բան այն չէր այս ticket-ը բեռնելիս։ Խնդրում ենք կրկին փորձել։",
+      "you": "Դուք",
+      "support": "Support",
+      "replyPlaceholder": "Գրեք պատասխան...",
+      "replyError": "Ինչ-որ բան այն չէր պատասխանն ուղարկելիս։ Խնդրում ենք կրկին փորձել։",
+      "reply": "Ուղարկել Պատասխան",
+      "sending": "Ուղարկվում է..."
+    }
+  },
+  "admin": {
+    "forbidden": {
+      "heading": "Անհրաժեշտ է Staff access",
+      "description": "Այս բաժինը հասանելի է միայն Meridian team-ի անդամներին։"
+    },
+    "list": {
+      "heading": "Admin — Բոլոր Ticket-երը",
+      "intro": "Բոլոր support ticket-երը, բոլոր user-երից։",
+      "allStatuses": "Բոլոր status-երը",
+      "loading": "Ticket-երը բեռնվում են...",
+      "empty": "Այս ֆիլտրին համապատասխանող ticket չկա։",
+      "error": "Ինչ-որ բան այն չէր ticket-երը բեռնելիս։ Խնդրում ենք կրկին փորձել։",
+      "assignedTo": "նշանակված է {{name}}-ին"
+    },
+    "detail": {
+      "back": "Վերադառնալ Admin-ին",
+      "loading": "Ticket-ը բեռնվում է...",
+      "notFound": "Ticket-ը չի գտնվել։",
+      "error": "Ինչ-որ բան այն չէր այս ticket-ը բեռնելիս։ Խնդրում ենք կրկին փորձել։",
+      "requester": {
+        "name": "Անուն",
+        "email": "Էլ. հասցե",
+        "meridianUsername": "Meridian Username",
+        "language": "Լեզու"
+      },
+      "status": "Status",
+      "assignToMe": "Նշանակել ինձ",
+      "unassign": "Հանել նշանակումը ({{name}})",
+      "replyPlaceholder": "Գրեք պատասխան հաճախորդին...",
+      "replyError": "Ինչ-որ բան այն չէր պատասխանն ուղարկելիս։ Խնդրում ենք կրկին փորձել։",
+      "reply": "Ուղարկել Պատասխան",
+      "sending": "Ուղարկվում է..."
+    }
+  },
+  "aiChat": {
+    "title": "Meridian AI Assistant",
+    "greeting": "Բարև։ Ես Meridian AI Assistant-ն եմ։ Հարցրու ինձ staking-ի, Treasury-ի, bonus-ների, Points & Levels-ի կամ ապագա Token & DAO-ի մասին։",
+    "placeholder": "Հարցրու Meridian-ի մասին...",
+    "send": "Ուղարկել հաղորդագրություն",
+    "open": "Բացել chat-ը",
+    "close": "Փակել chat-ը",
+    "thinking": "Մտածում է...",
+    "error": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
   },
   "footer": {
     "telegram": "Telegram",

@@ -4,6 +4,11 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { OPEN_APP_URL } from "../config/links";
+import useAuth from "../hooks/useAuth";
+import useProfile from "../hooks/useProfile";
+import { supabase } from "../lib/supabaseClient";
+
+const STAFF_ROLES = ["support", "admin"];
 
 const NAV_STRUCTURE = [
   { type: "link", key: "home", to: "/", end: true },
@@ -52,6 +57,55 @@ function OpenAppButton({ className = "" }) {
     >
       {t("header.openApp")}
     </a>
+  );
+}
+
+function HeaderAuthLinks({ className = "" }) {
+  const { t } = useTranslation();
+  const { user, loading } = useAuth();
+  const { profile } = useProfile();
+  const isStaff = Boolean(profile && STAFF_ROLES.includes(profile.role));
+
+  if (loading) return null;
+
+  if (user) {
+    return (
+      <div className={`flex items-center gap-3 ${className}`}>
+        {isStaff && (
+          <Link
+            to="/admin"
+            className="whitespace-nowrap text-sm text-text-dim transition-colors hover:text-text-main"
+          >
+            {t("header.admin")}
+          </Link>
+        )}
+        <Link
+          to="/my-tickets"
+          className="whitespace-nowrap text-sm text-text-dim transition-colors hover:text-text-main"
+        >
+          {t("header.myTickets")}
+        </Link>
+        <span className="max-w-[10rem] truncate text-sm text-text-dim" title={user.email}>
+          {user.email}
+        </span>
+        <button
+          type="button"
+          onClick={() => supabase.auth.signOut()}
+          className="text-sm text-text-dim transition-colors hover:text-text-main"
+        >
+          {t("header.signOut")}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      to="/login"
+      className={`whitespace-nowrap text-sm text-text-dim transition-colors hover:text-text-main ${className}`}
+    >
+      {t("header.login")}
+    </Link>
   );
 }
 
@@ -217,6 +271,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 xl:flex">
+          <HeaderAuthLinks />
           <LanguageSwitcher />
           <OpenAppButton />
         </div>
@@ -264,9 +319,12 @@ export default function Header() {
               ),
             )}
           </nav>
-          <div className="mt-6 flex items-center justify-between">
-            <LanguageSwitcher />
-            <OpenAppButton />
+          <div className="mt-6 flex flex-col gap-4">
+            <HeaderAuthLinks />
+            <div className="flex items-center justify-between">
+              <LanguageSwitcher />
+              <OpenAppButton />
+            </div>
           </div>
         </div>
       )}

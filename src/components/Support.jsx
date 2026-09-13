@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ArrowRight, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ArrowRight, AlertTriangle, CheckCircle2, Ticket } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
+import SecurityNotice from "./SecurityNotice";
 import { TELEGRAM_URL, SUPPORT_FORM_ENDPOINT } from "../config/links";
 
 const MESSAGE_MIN_LENGTH = 10;
@@ -185,6 +186,7 @@ function ContactForm() {
 export default function Support() {
   const { t } = useTranslation();
   const [introRef, introVisible] = useScrollReveal();
+  const [ticketCtaRef, ticketCtaVisible] = useScrollReveal();
   const [formRef, formVisible] = useScrollReveal();
   const [telegramRef, telegramVisible] = useScrollReveal();
 
@@ -196,6 +198,33 @@ export default function Support() {
             {t("support.heading")}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-text-secondary">{t("support.intro")}</p>
+        </div>
+
+        <SecurityNotice className="mt-8" />
+
+        <div
+          ref={ticketCtaRef}
+          className={`reveal mt-12 flex flex-col items-center gap-4 rounded-md border border-border-default bg-bg-card px-6 py-5 text-center sm:flex-row sm:justify-between sm:text-left ${
+            ticketCtaVisible ? "reveal-visible" : ""
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <div className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-sm border border-gold-primary/20 bg-gold-primary/12 text-gold-primary">
+              <Ticket className="h-4 w-4" strokeWidth={2} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-text-main">{t("support.ticketCta.prompt")}</p>
+              <p className="text-xs text-text-dim">{t("support.ticketCta.description")}</p>
+            </div>
+          </div>
+
+          <Link
+            to="/my-tickets/new"
+            className="inline-flex flex-shrink-0 items-center gap-1.5 text-sm font-medium text-gold-primary transition-colors hover:text-gold-light"
+          >
+            {t("support.ticketCta.link")}
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
+          </Link>
         </div>
 
         <div

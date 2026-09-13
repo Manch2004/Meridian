@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
+import RequireAuth from "./components/RequireAuth";
+import RequireStaff from "./components/RequireStaff";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import HowItWorks from "./pages/HowItWorks";
@@ -15,6 +17,13 @@ import Ecosystem from "./pages/Ecosystem";
 import Roadmap from "./pages/Roadmap";
 import FAQ from "./pages/FAQ";
 import Support from "./pages/Support";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import MyTickets from "./pages/MyTickets";
+import NewTicket from "./pages/NewTicket";
+import TicketDetail from "./pages/TicketDetail";
+import AdminTickets from "./pages/AdminTickets";
+import AdminTicketDetail from "./pages/AdminTicketDetail";
 
 function App() {
   return (
@@ -36,6 +45,17 @@ function App() {
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/my-tickets" element={<MyTickets />} />
+            <Route path="/my-tickets/new" element={<NewTicket />} />
+            <Route path="/my-tickets/:ticketId" element={<TicketDetail />} />
+          </Route>
+          <Route element={<RequireStaff />}>
+            <Route path="/admin" element={<AdminTickets />} />
+            <Route path="/admin/:ticketId" element={<AdminTicketDetail />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

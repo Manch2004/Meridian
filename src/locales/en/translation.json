@@ -3,7 +3,8 @@
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
     "learnMore": "Learn More",
-    "seeDetails": "See details"
+    "seeDetails": "See details",
+    "securityWarning": "Meridian staff will never ask for your password, private key, or seed phrase — not by email, not in a support ticket, not anywhere. Never share these with anyone."
   },
   "header": {
     "logo": "Meridian",
@@ -30,7 +31,11 @@
         "roadmap": "Roadmap"
       }
     },
-    "openApp": "Open App"
+    "openApp": "Open App",
+    "login": "Login",
+    "signOut": "Sign Out",
+    "myTickets": "My Tickets",
+    "admin": "Admin"
   },
   "hero": {
     "headline": "Expert-Managed Investing in Digital Assets — Backed by Technology",
@@ -462,6 +467,11 @@
   "support": {
     "heading": "Support",
     "intro": "Questions or concerns about Meridian? We're here to help.",
+    "ticketCta": {
+      "prompt": "Need a tracked support ticket?",
+      "description": "Open a formal ticket and follow its status in My Tickets.",
+      "link": "Open a ticket"
+    },
     "form": {
       "fields": {
         "name": { "label": "Name", "placeholder": "Your name" },
@@ -487,6 +497,170 @@
       "link": "Chat with us on Telegram"
     },
     "faqNote": "Looking for quick answers? Check our FAQ"
+  },
+  "auth": {
+    "login": {
+      "heading": "Log In",
+      "intro": "Welcome back. Log in to access your Meridian account.",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Your password"
+        }
+      },
+      "errors": {
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Please enter your password.",
+        "invalidCredentials": "Incorrect email or password.",
+        "generic": "Something went wrong. Please try again."
+      },
+      "submit": "Log In",
+      "submitting": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "heading": "Create Account",
+      "intro": "Create a Meridian account to manage your support tickets.",
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Create a password"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password",
+          "placeholder": "Re-enter your password"
+        }
+      },
+      "errors": {
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Please enter a password.",
+        "passwordTooShort": "Password must be at least {{count}} characters.",
+        "passwordMismatch": "Passwords do not match.",
+        "userExists": "An account with this email already exists.",
+        "generic": "Something went wrong. Please try again."
+      },
+      "submit": "Sign Up",
+      "submitting": "Creating account...",
+      "confirmEmail": "Account created — check your email to confirm it before logging in.",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in"
+    }
+  },
+  "myTickets": {
+    "categories": {
+      "accountVerification": "Account & Verification",
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal",
+      "staking": "Staking",
+      "bonusesPoints": "Bonuses & Points",
+      "referralSystem": "Referral System",
+      "meridianFund": "Meridian Fund",
+      "technicalProblems": "Technical Problems",
+      "security": "Security",
+      "other": "Other"
+    },
+    "statuses": {
+      "open": "Open",
+      "inProgress": "In Progress",
+      "waitingForUser": "Waiting for User",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "list": {
+      "heading": "My Tickets",
+      "intro": "Track the status of your support tickets and reply to the team.",
+      "newTicket": "New Ticket",
+      "loading": "Loading your tickets...",
+      "empty": "You haven't opened any support tickets yet.",
+      "error": "Something went wrong loading your tickets. Please try again."
+    },
+    "new": {
+      "heading": "Open a Support Ticket",
+      "intro": "Tell us what's going on and we'll get back to you here.",
+      "fields": {
+        "category": { "label": "Category" },
+        "meridianUsername": { "label": "Meridian Username (optional)", "placeholder": "Your Meridian username" },
+        "name": { "label": "Name (optional)", "placeholder": "Your name" },
+        "email": { "label": "Email", "placeholder": "you@example.com" },
+        "message": { "label": "Message", "placeholder": "Describe your issue in detail" }
+      },
+      "errors": {
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Please enter a message.",
+        "messageTooShort": "Message must be at least {{count}} characters.",
+        "generic": "Something went wrong. Please try again."
+      },
+      "submit": "Submit Ticket",
+      "submitting": "Submitting..."
+    },
+    "detail": {
+      "back": "Back to My Tickets",
+      "loading": "Loading ticket...",
+      "notFound": "Ticket not found.",
+      "error": "Something went wrong loading this ticket. Please try again.",
+      "you": "You",
+      "support": "Support",
+      "replyPlaceholder": "Write a reply...",
+      "replyError": "Something went wrong sending your reply. Please try again.",
+      "reply": "Send Reply",
+      "sending": "Sending..."
+    }
+  },
+  "admin": {
+    "forbidden": {
+      "heading": "Staff access required",
+      "description": "This area is only available to Meridian team members."
+    },
+    "list": {
+      "heading": "Admin — All Tickets",
+      "intro": "Every support ticket, across all users.",
+      "allStatuses": "All statuses",
+      "loading": "Loading tickets...",
+      "empty": "No tickets match this filter.",
+      "error": "Something went wrong loading tickets. Please try again.",
+      "assignedTo": "assigned to {{name}}"
+    },
+    "detail": {
+      "back": "Back to Admin",
+      "loading": "Loading ticket...",
+      "notFound": "Ticket not found.",
+      "error": "Something went wrong loading this ticket. Please try again.",
+      "requester": {
+        "name": "Name",
+        "email": "Email",
+        "meridianUsername": "Meridian Username",
+        "language": "Language"
+      },
+      "status": "Status",
+      "assignToMe": "Assign to me",
+      "unassign": "Unassign ({{name}})",
+      "replyPlaceholder": "Write a reply to the customer...",
+      "replyError": "Something went wrong sending your reply. Please try again.",
+      "reply": "Send Reply",
+      "sending": "Sending..."
+    }
+  },
+  "aiChat": {
+    "title": "Meridian AI Assistant",
+    "greeting": "Hi! I'm the Meridian AI Assistant. Ask me about staking, the Treasury, bonuses, Points & Levels, or the planned Token & DAO.",
+    "placeholder": "Ask about Meridian...",
+    "send": "Send message",
+    "open": "Open chat",
+    "close": "Close chat",
+    "thinking": "Thinking...",
+    "error": "Something went wrong. Please try again."
   },
   "footer": {
     "telegram": "Telegram",
