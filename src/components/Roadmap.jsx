@@ -6,7 +6,6 @@ function PhaseRow({ phase, index }) {
   const { t } = useTranslation();
   const [ref, isVisible] = useScrollReveal();
   const isLeft = index % 2 === 0;
-  const isActive = phase.status === "inProgress";
   const Icon = phase.Icon;
 
   return (
@@ -17,19 +16,11 @@ function PhaseRow({ phase, index }) {
         isVisible ? "reveal-visible" : ""
       }`}
     >
-      <div
-        className={`relative z-10 col-start-1 row-start-1 flex h-12 w-12 flex-shrink-0 flex-col items-center justify-center rounded-full border bg-bg-elevated md:col-start-2 ${
-          isActive
-            ? "border-gold-primary/60 text-gold-primary"
-            : "border-border-strong text-text-secondary"
-        }`}
-      >
+      <div className="relative z-10 col-start-1 row-start-1 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-gold-primary/20 bg-gold-primary/12 text-gold-primary md:col-start-2">
         <Icon className="h-5 w-5" strokeWidth={1.75} />
       </div>
 
-      <span
-        className={`col-start-1 row-start-2 mt-2 text-center font-mono text-xs text-text-muted md:col-start-2`}
-      >
+      <span className="col-start-1 row-start-2 mt-2 text-center font-mono text-xs text-text-muted md:col-start-2">
         0{index + 1}
       </span>
 
@@ -40,24 +31,20 @@ function PhaseRow({ phase, index }) {
             : "md:col-start-3 md:row-start-1 md:text-left"
         }`}
       >
-        <div
-          className={`gold-card inline-block w-full p-6 text-left ${isActive ? "is-active" : ""}`}
-        >
-          <span
-            className={`mb-3 inline-flex items-center rounded-sm border px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide ${
-              isActive
-                ? "border-gold-primary/30 bg-gold-primary/10 text-gold-primary"
-                : "border-border text-text-muted"
-            }`}
-          >
-            {t(`roadmap.status.${phase.status}`)}
-          </span>
+        <div className="gold-card inline-block w-full p-6 text-left">
           <h3 className="text-base font-semibold text-text-main">
             {t(`roadmap.phases.${phase.key}.title`)}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-text-dim">
-            {t(`roadmap.phases.${phase.key}.description`)}
-          </p>
+          <ul className={`mt-4 flex flex-wrap gap-2 ${isLeft ? "md:justify-end" : "md:justify-start"}`}>
+            {phase.items.map((itemKey) => (
+              <li
+                key={itemKey}
+                className="rounded-full border border-border-default bg-bg-card px-3 py-1 text-xs text-text-dim"
+              >
+                {t(`roadmap.phases.${phase.key}.items.${itemKey}`)}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

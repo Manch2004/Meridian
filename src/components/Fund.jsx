@@ -1,20 +1,21 @@
 import { useTranslation } from "react-i18next";
-import { AlertTriangle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { AlertTriangle, ArrowRight } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 import useCountUp from "../hooks/useCountUp";
-import { fundStats } from "../data/fundDemoData";
+import { treasuryStats } from "../data/fundDemoData";
 import FundChart from "./FundChart";
 
 const STATS = [
-  { key: "unitPrice", value: fundStats.unitPrice, formatter: (v) => `$${v.toFixed(2)}` },
   {
-    key: "fundValue",
-    value: fundStats.fundValue,
-    formatter: (v) => `$${Math.round(v).toLocaleString("en-US")}`,
+    key: "dailyPerformance",
+    value: treasuryStats.dailyPerformance,
+    formatter: (v) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`,
   },
+  { key: "treasuryCapital", value: null, formatter: null },
   {
-    key: "totalUnits",
-    value: fundStats.totalUnits,
+    key: "activeStrategies",
+    value: treasuryStats.activeStrategies,
     formatter: (v) => Math.round(v).toLocaleString("en-US"),
   },
   { key: "activeSince", value: null, formatter: null },
@@ -60,6 +61,7 @@ function StatCard({ statKey, value, formatter, index }) {
 export default function Fund() {
   const { t } = useTranslation();
   const [headingRef, headingVisible] = useScrollReveal();
+  const [introRef, introVisible] = useScrollReveal();
 
   return (
     <section id="fund" className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
@@ -84,6 +86,20 @@ export default function Fund() {
           <div className="mt-5 flex justify-center">
             <DemoDataBadge />
           </div>
+        </div>
+
+        <div
+          ref={introRef}
+          className={`reveal mx-auto mt-8 max-w-2xl text-center ${introVisible ? "reveal-visible" : ""}`}
+        >
+          <p className="text-base leading-relaxed text-text-secondary">{t("fund.intro")}</p>
+          <Link
+            to="/how-it-works"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold-primary transition-colors hover:text-gold-light"
+          >
+            {t("fund.howItWorksLink")}
+            <ArrowRight className="h-4 w-4" strokeWidth={2} />
+          </Link>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

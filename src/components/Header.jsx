@@ -1,18 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { OPEN_APP_URL } from "../config/links";
 
-const NAV_ITEMS = [
-  { key: "home", to: "/" },
-  { key: "about", to: "/about" },
-  { key: "howItWorks", to: "/how-it-works" },
-  { key: "fund", to: "/fund" },
-  { key: "technology", to: "/technology" },
-  { key: "roadmap", to: "/roadmap" },
-  { key: "token", to: "/token" },
-  { key: "faq", to: "/faq" },
+const NAV_STRUCTURE = [
+  { type: "link", key: "home", to: "/", end: true },
+  { type: "link", key: "about", to: "/about" },
+  {
+    type: "group",
+    key: "howItWorks",
+    items: [
+      { key: "howItWorks", to: "/how-it-works" },
+      { key: "staking", to: "/staking" },
+      { key: "fund", to: "/fund" },
+    ],
+  },
+  {
+    type: "group",
+    key: "technology",
+    items: [
+      { key: "technology", to: "/technology" },
+      { key: "security", to: "/security" },
+      { key: "token", to: "/token" },
+    ],
+  },
+  {
+    type: "group",
+    key: "ecosystem",
+    items: [
+      { key: "bonuses", to: "/bonuses" },
+      { key: "levels", to: "/levels" },
+      { key: "ecosystem", to: "/ecosystem" },
+      { key: "roadmap", to: "/roadmap" },
+    ],
+  },
+  { type: "link", key: "faq", to: "/faq" },
+  { type: "link", key: "support", to: "/support" },
 ];
 
 function OpenAppButton({ className = "" }) {
@@ -30,8 +55,116 @@ function OpenAppButton({ className = "" }) {
   );
 }
 
+function DesktopNavGroup({ group, isActive }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const closeTimeout = useRef(null);
+
+  const openNow = () => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setOpen(true);
+  };
+  const closeSoon = () => {
+    closeTimeout.current = setTimeout(() => setOpen(false), 120);
+  };
+
+  useEffect(() => () => closeTimeout.current && clearTimeout(closeTimeout.current), []);
+
+  return (
+    <div className="relative" onMouseEnter={openNow} onMouseLeave={closeSoon}>
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+        className={`flex items-center gap-1 whitespace-nowrap text-sm transition-colors hover:text-text-main ${
+          isActive ? "text-gold-primary" : "text-text-dim"
+        }`}
+      >
+        {t(`header.nav.groups.${group.key}`)}
+        <ChevronDown
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          strokeWidth={2}
+        />
+      </button>
+
+      <div
+        className={`absolute left-1/2 top-full z-50 mt-3 w-72 -translate-x-1/2 rounded-md border border-border-default bg-bg-secondary/95 p-2 shadow-lg backdrop-blur-md transition-all duration-150 ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
+        }`}
+      >
+        {group.items.map((item) => (
+          <NavLink
+            key={item.key}
+            to={item.to}
+            onClick={() => setOpen(false)}
+            className={({ isActive: itemActive }) =>
+              `block rounded-sm px-3 py-2.5 text-sm transition-colors hover:bg-gold-primary/10 hover:text-gold-light ${
+                itemActive ? "text-gold-primary" : "text-text-dim"
+              }`
+            }
+          >
+            {t(`header.nav.items.${item.key}`)}
+          </NavLink>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileNavGroup({ group, isActive, onNavigate }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+        className={`flex w-full items-center justify-between gap-4 text-base transition-colors ${
+          isActive ? "text-gold-primary" : "text-text-dim"
+        }`}
+      >
+        {t(`header.nav.groups.${group.key}`)}
+        <ChevronDown
+          className={`h-4 w-4 flex-shrink-0 transition-transform duration-300 ${
+            open ? "rotate-180 text-gold-primary" : ""
+          }`}
+          strokeWidth={2}
+        />
+      </button>
+
+      <div
+        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div className="mt-3 flex flex-col gap-3 border-l border-border-default pl-4">
+            {group.items.map((item) => (
+              <NavLink
+                key={item.key}
+                to={item.to}
+                end={item.to === "/"}
+                onClick={onNavigate}
+                className={({ isActive: itemActive }) =>
+                  `text-sm transition-colors hover:text-text-main ${
+                    itemActive ? "text-gold-primary" : "text-text-muted"
+                  }`
+                }
+              >
+                {t(`header.nav.items.${item.key}`)}
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Header() {
   const { t } = useTranslation();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -42,6 +175,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinkClassName = ({ isActive }) =>
     `whitespace-nowrap text-sm transition-colors hover:text-text-main ${
       isActive ? "text-gold-primary" : "text-text-dim"
@@ -51,6 +188,8 @@ export default function Header() {
     `text-base transition-colors hover:text-text-main ${
       isActive ? "text-gold-primary" : "text-text-dim"
     }`;
+
+  const isGroupActive = (group) => group.items.some((item) => item.to === location.pathname);
 
   return (
     <header
@@ -66,11 +205,15 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-5 xl:flex">
-          {NAV_ITEMS.map((item) => (
-            <NavLink key={item.key} to={item.to} end={item.to === "/"} className={navLinkClassName}>
-              {t(`header.nav.${item.key}`)}
-            </NavLink>
-          ))}
+          {NAV_STRUCTURE.map((entry) =>
+            entry.type === "link" ? (
+              <NavLink key={entry.key} to={entry.to} end={entry.end} className={navLinkClassName}>
+                {t(`header.nav.${entry.key}`)}
+              </NavLink>
+            ) : (
+              <DesktopNavGroup key={entry.key} group={entry} isActive={isGroupActive(entry)} />
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-4 xl:flex">
@@ -98,19 +241,28 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-border-default bg-bg-secondary/95 px-6 py-6 backdrop-blur-md xl:hidden">
-          <nav className="flex flex-col gap-4">
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.key}
-                to={item.to}
-                end={item.to === "/"}
-                onClick={() => setMenuOpen(false)}
-                className={mobileNavLinkClassName}
-              >
-                {t(`header.nav.${item.key}`)}
-              </NavLink>
-            ))}
+        <div className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-border-default bg-bg-secondary/95 px-6 py-6 backdrop-blur-md xl:hidden">
+          <nav className="flex flex-col gap-5">
+            {NAV_STRUCTURE.map((entry) =>
+              entry.type === "link" ? (
+                <NavLink
+                  key={entry.key}
+                  to={entry.to}
+                  end={entry.end}
+                  onClick={() => setMenuOpen(false)}
+                  className={mobileNavLinkClassName}
+                >
+                  {t(`header.nav.${entry.key}`)}
+                </NavLink>
+              ) : (
+                <MobileNavGroup
+                  key={entry.key}
+                  group={entry}
+                  isActive={isGroupActive(entry)}
+                  onNavigate={() => setMenuOpen(false)}
+                />
+              ),
+            )}
           </nav>
           <div className="mt-6 flex items-center justify-between">
             <LanguageSwitcher />

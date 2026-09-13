@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, AlertTriangle } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 import faqItems from "../data/faqItems";
+import riskCategories from "../data/riskCategories";
 
 function FAQItem({ item, index, isOpen, onToggle }) {
   const { t } = useTranslation();
@@ -47,6 +48,42 @@ function FAQItem({ item, index, isOpen, onToggle }) {
   );
 }
 
+function RiskDisclosure() {
+  const { t } = useTranslation();
+  const [ref, isVisible] = useScrollReveal();
+
+  return (
+    <div
+      id="risk-disclosure"
+      ref={ref}
+      className={`reveal mt-20 scroll-mt-24 border-t border-border-default pt-14 ${
+        isVisible ? "reveal-visible" : ""
+      }`}
+    >
+      <div className="flex items-start gap-3 rounded-md border border-border-default bg-bg-card p-5">
+        <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-text-dim" strokeWidth={2} />
+        <div>
+          <h2 className="text-lg font-semibold text-text-main">{t("faq.risk.heading")}</h2>
+          <p className="mt-2 text-sm leading-relaxed text-text-dim">{t("faq.risk.intro")}</p>
+        </div>
+      </div>
+
+      <ul className="mt-6 flex flex-wrap gap-2">
+        {riskCategories.map((key) => (
+          <li
+            key={key}
+            className="rounded-full border border-border-default bg-bg-secondary px-3 py-1.5 text-xs text-text-dim"
+          >
+            {t(`faq.risk.categories.${key}`)}
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-6 text-sm leading-relaxed text-text-muted">{t("faq.risk.closing")}</p>
+    </div>
+  );
+}
+
 export default function FAQ() {
   const { t } = useTranslation();
   const [introRef, introVisible] = useScrollReveal();
@@ -75,6 +112,8 @@ export default function FAQ() {
             />
           ))}
         </div>
+
+        <RiskDisclosure />
       </div>
     </section>
   );

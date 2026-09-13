@@ -10,12 +10,25 @@
     "nav": {
       "home": "Home",
       "about": "About",
-      "howItWorks": "How It Works",
-      "fund": "Fund",
-      "technology": "Technology",
-      "roadmap": "Roadmap",
-      "token": "Token",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "support": "Support",
+      "groups": {
+        "howItWorks": "How It Works",
+        "technology": "Technology",
+        "ecosystem": "Ecosystem"
+      },
+      "items": {
+        "howItWorks": "How It Works",
+        "staking": "Staking Products",
+        "fund": "Treasury Performance",
+        "technology": "Technology",
+        "security": "Security Infrastructure",
+        "token": "Token & DAO",
+        "bonuses": "Bonus Ecosystem",
+        "levels": "Points & Levels",
+        "ecosystem": "Ecosystem Overview",
+        "roadmap": "Roadmap"
+      }
     },
     "openApp": "Open App"
   },
@@ -32,108 +45,212 @@
   },
   "about": {
     "heading": "About Meridian",
-    "intro": "Meridian is an AI-powered fund trading crypto markets through exchanges and arbitrage. The team manages everything — you never trade yourself.",
+    "intro": "Meridian is a digital capital management ecosystem that gives participants structured access to professionally managed digital asset strategies — without needing to trade, analyze markets, or manage multiple platforms themselves.",
     "pillars": {
-      "ai": {
-        "title": "AI",
-        "description": "AI models support the fund's research and decision-making process, helping identify patterns across markets."
+      "treasury": {
+        "title": "Meridian Treasury",
+        "description": "The Treasury holds Meridian's operating capital and deploys it across multiple digital asset markets and platforms."
       },
-      "exchanges": {
-        "title": "Exchanges",
-        "description": "The fund operates across multiple exchanges, diversifying execution and market access."
+      "infrastructure": {
+        "title": "Meridian Infrastructure",
+        "description": "Capital is distributed across exchanges, wallets, and P2P markets, where arbitrage and cross-market operations form the core of Meridian's strategy, supported by a controlled, limited use of AI-driven analysis."
       },
-      "arbitrage": {
-        "title": "Arbitrage",
-        "description": "Arbitrage strategies help the fund capture pricing inefficiencies across markets."
+      "participants": {
+        "title": "Meridian Participants",
+        "description": "Participants deposit supported digital assets and allocate their balance across available staking products."
       }
     }
   },
   "howItWorks": {
     "heading": "How It Works",
     "steps": {
-      "access": {
-        "title": "Access",
-        "description": "Access by invitation only."
-      },
       "deposit": {
         "title": "Deposit",
-        "description": "Deposit funds into Meridian."
+        "description": "Deposit a supported digital asset, such as USDT (TRC20)."
       },
-      "confirmation": {
-        "title": "Confirmation",
-        "description": "Your deposit gets confirmed."
+      "chooseProduct": {
+        "title": "Choose a Staking Product",
+        "description": "Select from the available staking options for your deposit."
       },
-      "units": {
-        "title": "Units",
-        "description": "Participation tracked in Units."
+      "dailyPerformance": {
+        "title": "Daily Performance Calculated",
+        "description": "Meridian calculates the Treasury's actual daily performance."
       },
-      "portfolio": {
-        "title": "Portfolio",
-        "description": "See your full portfolio."
+      "proportionalResult": {
+        "title": "Proportional Result Credited",
+        "description": "Eligible staking positions receive a proportional result, minus Meridian's performance fee."
+      },
+      "withdraw": {
+        "title": "Withdraw",
+        "description": "Once your staking period ends, your balance becomes eligible for withdrawal."
       }
     }
   },
+  "stakingProducts": {
+    "heading": "Staking Products",
+    "intro": "Meridian offers several staking options, each with its own period and performance fee structure, so participants can choose the term that fits them best.",
+    "feeLabel": "Performance Fee",
+    "products": {
+      "flexible": {
+        "title": "Flexible",
+        "period": "No fixed period",
+        "note": "Full flexibility, with a higher performance fee."
+      },
+      "oneDay": {
+        "title": "1-Day",
+        "period": "1 day",
+        "note": "A short commitment keeps the performance fee moderate."
+      },
+      "oneWeek": {
+        "title": "1-Week",
+        "period": "1 week",
+        "note": "A longer commitment lowers the performance fee further."
+      },
+      "oneMonth": {
+        "title": "1-Month",
+        "period": "1 month",
+        "note": "Longer commitment, lowest performance fee."
+      }
+    },
+    "clarifyingNote": "These percentages represent Meridian's share of generated profit — they are not interest rates or promised returns.",
+    "example": {
+      "heading": "Example",
+      "text": "If a staking position generates ${{generatedProfit}} in eligible profit with a {{feePercent}}% performance fee, Meridian receives ${{meridianFee}} and ${{participantShare}} is credited to the participant.",
+      "generatedProfitLabel": "Generated Profit",
+      "participantShareLabel": "Participant Share",
+      "meridianFeeLabel": "Meridian Fee"
+    },
+    "closingLink": "See how staking connects to Treasury performance"
+  },
+  "bonusEcosystem": {
+    "heading": "Bonus Ecosystem",
+    "intro": "Participation, activity and contribution unlock additional benefits throughout the Meridian ecosystem.",
+    "categories": {
+      "registration": {
+        "title": "Registration Bonus",
+        "description": "A welcome bonus for new participants joining Meridian."
+      },
+      "verification": {
+        "title": "Verification Bonus",
+        "description": "A bonus awarded after completing account verification."
+      },
+      "firstDeposit": {
+        "title": "First Deposit Bonus",
+        "description": "A bonus on a participant's first deposit."
+      },
+      "referral": {
+        "title": "Referral Bonus",
+        "description": "A bonus for successful referrals."
+      },
+      "stakingBonuses": {
+        "title": "Staking Bonuses",
+        "description": "Additional bonuses for daily, weekly and monthly staking activity."
+      }
+    },
+    "clarifyingNote": "Bonus balances may have different conditions from deposited balances — for example, certain bonus funds may only be eligible for selected staking products. Bonus types and terms may evolve as the ecosystem develops.",
+    "wheel": {
+      "heading": "Meridian Daily Wheel",
+      "description": "Eligible users can spin the Wheel once a day for a chance at rewards, bonuses and other ecosystem benefits.",
+      "note": "Available rewards may evolve as the Meridian ecosystem grows."
+    }
+  },
+  "pointsLevels": {
+    "heading": "Points & Levels",
+    "intro": "Meridian Points measure participation across the ecosystem, and your accumulated Points shape your Meridian Level — unlocking expanded ecosystem benefits as you progress.",
+    "earnPoints": {
+      "heading": "How You Earn Points",
+      "items": {
+        "staking": "Staking",
+        "accountActivity": "Account Activity",
+        "referrals": "Referrals",
+        "verification": "Verification",
+        "deposits": "Deposits",
+        "ecosystemParticipation": "Ecosystem Participation",
+        "tasksCampaigns": "Tasks & Campaigns"
+      }
+    },
+    "levels": {
+      "heading": "Meridian Levels",
+      "intro": "As Points accumulate, participants progress through five Meridian Levels — from Bronze to Obsidian.",
+      "tiers": {
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold",
+        "platinum": "Platinum",
+        "obsidian": "Obsidian"
+      }
+    },
+    "benefits": {
+      "heading": "Level Benefits",
+      "intro": "Higher Meridian Levels can unlock a range of expanded ecosystem benefits, including:",
+      "items": {
+        "increasedStakingLimits": "Increased staking limits",
+        "additionalBonuses": "Additional bonuses",
+        "improvedRewardOpportunities": "Improved reward opportunities",
+        "exclusiveDrops": "Exclusive drops",
+        "accessToSelectedProducts": "Access to selected products",
+        "futureTokenBenefits": "Future token-related benefits",
+        "additionalEcosystemPrivileges": "Additional ecosystem privileges"
+      }
+    },
+    "clarifyingNote": "Exact requirements and benefits for each level may evolve as Meridian collects operational data and expands its ecosystem."
+  },
   "fund": {
-    "heading": "Fund Overview",
-    "demoData": "Demo Data — for illustration purposes only, not real fund performance",
-    "chartTitle": "Unit Price History",
-    "chartTooltipUnitPrice": "Unit Price",
+    "heading": "Treasury Performance",
+    "demoData": "Demo data for illustration only — historical performance does not guarantee future performance",
+    "intro": "Meridian calculates the Treasury's daily performance, which forms the basis for calculating results for eligible staking positions.",
+    "howItWorksLink": "See How It Works",
+    "chartTitle": "Daily Treasury Performance",
+    "chartTooltipPerformance": "Daily Performance",
+    "chartDayLabel": "Day {{day}}",
     "stats": {
-      "unitPrice": {
-        "label": "Unit Price"
+      "dailyPerformance": {
+        "label": "Daily Treasury Performance"
       },
-      "fundValue": {
-        "label": "Fund Value"
+      "treasuryCapital": {
+        "label": "Treasury Capital",
+        "value": "Demo Value"
       },
-      "totalUnits": {
-        "label": "Total Units"
+      "activeStrategies": {
+        "label": "Active Strategies"
       },
       "activeSince": {
         "label": "Active Since",
         "value": "Jan 2024"
       }
-    },
-    "months": {
-      "jan": "Jan",
-      "feb": "Feb",
-      "mar": "Mar",
-      "apr": "Apr",
-      "may": "May",
-      "jun": "Jun",
-      "jul": "Jul",
-      "aug": "Aug"
     }
   },
   "technology": {
     "heading": "Technology",
-    "intro": "A few core technologies power the fund.",
+    "intro": "A few core technologies power Meridian Treasury operations.",
     "pillars": {
       "ai": {
         "title": "AI",
-        "description": "AI helps analyze markets and guide decisions."
+        "description": "AI supports market analysis, risk monitoring and strategy optimization — assisting decision-making without removing financial risk."
       },
       "arbitrage": {
         "title": "Arbitrage",
-        "description": "The fund profits from price gaps between markets."
+        "description": "Meridian captures pricing inefficiencies through exchange arbitrage and cross-market operations."
       },
       "exchanges": {
         "title": "Exchanges",
-        "description": "Meridian trades across several major crypto exchanges."
+        "description": "Meridian operates across major exchanges, wallets and P2P markets to diversify execution."
       },
       "riskManagement": {
         "title": "Risk Management",
-        "description": "Built-in safeguards help protect the fund's capital."
+        "description": "Meridian prioritizes lower-risk strategies like arbitrage before allocating limited capital to AI-assisted trading."
       }
-    }
+    },
+    "closingNote": "AI plays a controlled, supporting role — up to ~10% of eligible Treasury capital may be allocated to AI-assisted trading, with arbitrage and lower-risk strategies remaining Meridian's primary focus."
   },
   "token": {
-    "heading": "Future Token Ecosystem",
-    "disclaimer": "Tokenomics, conversion terms and reward mechanisms are not yet finalized and are subject to change.",
-    "intro": "A possible future token, planned to connect with today's participation system.",
+    "heading": "Token & DAO",
+    "disclaimer": "Tokenomics, conversion terms, governance structure and reward mechanisms are not yet finalized and are subject to change.",
+    "intro": "A possible future token and governance layer, planned to connect with today's participation system.",
     "concepts": {
       "futureToken": {
         "title": "Future Meridian Token",
-        "description": "A future Meridian token may be introduced."
+        "description": "A future Meridian token may be introduced, potentially serving as an access and governance layer across the ecosystem — including DAO governance, ecosystem access, and access to future Meridian products."
       },
       "tokenAllocation": {
         "title": "Token Allocation",
@@ -144,39 +261,144 @@
         "description": "Early participants may receive rewards — details pending."
       }
     },
+    "dao": {
+      "heading": "Meridian DAO",
+      "intro": "Meridian's long-term vision includes progressively introducing decentralized governance in selected areas of the ecosystem.",
+      "items": {
+        "communityGovernance": {
+          "title": "Community Governance",
+          "description": "DAO participants may eventually take part in decisions related to ecosystem development, selected products, and community initiatives."
+        },
+        "professionalTreasuryManagement": {
+          "title": "Professional Treasury Management",
+          "description": "Treasury management and security-sensitive decisions are expected to remain under professional management, not unrestricted public voting."
+        },
+        "evolvingModel": {
+          "title": "Evolving Model",
+          "description": "The final governance model will be developed in later stages, as the ecosystem matures."
+        }
+      }
+    },
     "diagram": {
       "current": "Current Participation (Units)",
       "planned": "Planned",
       "future": "Future Token Ecosystem"
     }
   },
+  "security": {
+    "heading": "Security Infrastructure",
+    "intro": "Meridian does not rely on a single wallet or platform. Capital is distributed across multiple infrastructure types to reduce risk.",
+    "infrastructure": {
+      "heading": "Infrastructure Layers",
+      "layers": {
+        "cex": "Centralized Exchanges (CEX)",
+        "dex": "Decentralized Exchanges (DEX)",
+        "corporateWallets": "Corporate Wallets",
+        "operationalWallets": "Operational Wallets",
+        "p2pPlatforms": "P2P Platforms"
+      }
+    },
+    "accessControl": {
+      "heading": "Access Control",
+      "points": {
+        "multisigAuthorization": {
+          "title": "Multisignature Authorization",
+          "description": "Critical wallet infrastructure may use multisignature authorization for added protection."
+        },
+        "restrictedAccess": {
+          "title": "Restricted Access",
+          "description": "Only authorized members of the operating structure have access to relevant Treasury infrastructure."
+        },
+        "distributedRisk": {
+          "title": "Distributed Risk",
+          "description": "Distributing capital across multiple platforms reduces single-point-of-failure risk."
+        }
+      }
+    },
+    "clarifyingNote": "Exact wallet addresses, platform allocations and operational security architecture remain private where disclosure could create additional security risk."
+  },
+  "ecosystem": {
+    "heading": "Meridian Ecosystem",
+    "intro": "Meridian is developed as a multi-platform ecosystem, with each component playing a specific role in the overall experience.",
+    "youAreHere": "You are here",
+    "interfaces": {
+      "app": {
+        "title": "Meridian App",
+        "description": "Primary interface for balances, staking, bonuses, levels and account activity."
+      },
+      "website": {
+        "title": "Meridian Website",
+        "description": "Public information layer explaining Meridian, its ecosystem and ongoing development."
+      },
+      "telegram": {
+        "title": "Meridian Telegram",
+        "description": "Communication, community updates and ecosystem announcements.",
+        "link": "Join the channel"
+      },
+      "bot": {
+        "title": "Meridian Bot",
+        "description": "Telegram-based interface expanding access to Meridian services and community functionality."
+      }
+    },
+    "closingNote": "Additional interfaces and products may be introduced as the ecosystem develops."
+  },
   "roadmap": {
     "heading": "Roadmap",
-    "intro": "Meridian's development is built across clear phases, from the fund's core infrastructure to a future token ecosystem.",
-    "status": {
-      "inProgress": "In Progress",
-      "planned": "Planned"
-    },
+    "intro": "Meridian's development is built across five phases, from core Treasury infrastructure to a broader multi-product ecosystem.",
     "phases": {
-      "foundation": {
-        "title": "Foundation",
-        "description": "Core fund infrastructure, development of AI and arbitrage systems, invite-based early access."
+      "infrastructure": {
+        "title": "Infrastructure",
+        "items": {
+          "treasuryModel": "Treasury & operating model",
+          "app": "Meridian App",
+          "website": "Meridian Website",
+          "telegram": "Telegram infrastructure",
+          "capitalization": "Initial Treasury capitalization"
+        }
       },
-      "growth": {
-        "title": "Growth",
-        "description": "Expanding the participant base, adding exchange integrations, developing the transparency dashboard."
+      "launch": {
+        "title": "Launch",
+        "items": {
+          "botActivation": "Meridian Bot activation",
+          "referralOnboarding": "Referral-based onboarding",
+          "initialStaking": "Initial staking products",
+          "dailyWheel": "Daily Wheel",
+          "pointsLevels": "Points & Levels",
+          "bonusEcosystem": "Initial bonus ecosystem"
+        }
       },
-      "ecosystemExpansion": {
-        "title": "Ecosystem Expansion",
-        "description": "Deepening risk management systems, integrating new strategies, expanded reporting."
+      "expansion": {
+        "title": "Expansion",
+        "items": {
+          "treasuryGrowth": "Treasury growth",
+          "participantCapacity": "Expanded participant capacity",
+          "depositNetworks": "Additional deposit methods & networks",
+          "stakingExpansion": "Expanded staking products",
+          "transparencyReporting": "Improved transparency & reporting",
+          "aiExpansion": "Expanded AI infrastructure"
+        }
       },
-      "tokenEcosystem": {
-        "title": "Token Ecosystem",
-        "description": "Development of the future Meridian Token and its integration with the current participation system."
+      "web3": {
+        "title": "Meridian Web3",
+        "items": {
+          "daoArchitecture": "Meridian DAO architecture",
+          "tokenomics": "Tokenomics design & publication",
+          "daoToken": "Meridian DAO Token development",
+          "tokenUtility": "Token utility integration",
+          "dropsLevels": "Drops & token-based levels",
+          "ecosystemAccess": "Expanded ecosystem access"
+        }
       },
-      "beyond": {
-        "title": "Beyond",
-        "description": "Long-term vision, additional financial instruments and functionality."
+      "ecosystem": {
+        "title": "Meridian Ecosystem",
+        "items": {
+          "internationalExpansion": "International expansion",
+          "fintechProducts": "Additional fintech products",
+          "aiSystems": "Expanded AI systems",
+          "capitalProducts": "New capital-management products",
+          "daoDevelopment": "DAO development",
+          "blockchainIntegration": "Additional blockchain infrastructure"
+        }
       }
     }
   },
@@ -215,12 +437,63 @@
         "question": "How can I contact Meridian?",
         "answer": "Through Meridian's Telegram channel (link in the footer)."
       }
+    },
+    "risk": {
+      "heading": "Risk Disclosure",
+      "intro": "Participation in Meridian involves exposure to multiple categories of risk. This list is not exhaustive, and risk factors may evolve as the ecosystem develops.",
+      "categories": {
+        "digitalAssetMarket": "Digital asset market risk",
+        "exchange": "Exchange risk",
+        "counterparty": "Counterparty risk",
+        "p2pCounterparty": "P2P counterparty risk",
+        "stablecoin": "Stablecoin risk",
+        "liquidity": "Liquidity risk",
+        "blockchainNetwork": "Blockchain and network risk",
+        "smartContract": "Smart contract risk",
+        "walletCustody": "Wallet and custody risk",
+        "cybersecurity": "Cybersecurity risk",
+        "aiAlgorithmic": "AI and algorithmic risk",
+        "operational": "Operational risk",
+        "regulatoryLegal": "Regulatory and legal risk"
+      },
+      "closing": "Meridian does not guarantee a fixed return. Past performance does not guarantee future results. Participate only with capital you can afford to expose to financial risk."
     }
+  },
+  "support": {
+    "heading": "Support",
+    "intro": "Questions or concerns about Meridian? We're here to help.",
+    "form": {
+      "fields": {
+        "name": { "label": "Name", "placeholder": "Your name" },
+        "email": { "label": "Email", "placeholder": "you@example.com" },
+        "message": { "label": "Message", "placeholder": "How can we help?" }
+      },
+      "errors": {
+        "nameRequired": "Please enter your name.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Please enter a message.",
+        "messageTooShort": "Message must be at least {{count}} characters."
+      },
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you — we've received your message and will respond soon.",
+      "sendAnother": "Send another message",
+      "error": "Something went wrong. Please try again or contact us on Telegram."
+    },
+    "telegram": {
+      "prompt": "Prefer Telegram?",
+      "description": "Chat with the Meridian team and community directly.",
+      "link": "Chat with us on Telegram"
+    },
+    "faqNote": "Looking for quick answers? Check our FAQ"
   },
   "footer": {
     "telegram": "Telegram",
+    "support": "Support",
     "openApp": "Open App",
-    "disclaimer": "Meridian is an investment fund. Participation involves risk. Past or projected performance is not guaranteed.",
+    "disclaimer": "Meridian is a digital capital management ecosystem. Participation involves financial, technological, counterparty and regulatory risk. Meridian does not guarantee a fixed return. Past performance does not guarantee future results.",
+    "riskDisclosureLink": "Full risk disclosure →",
     "copyright": "© {{year}} Meridian. All rights reserved."
   }
 }

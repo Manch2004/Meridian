@@ -30,6 +30,7 @@ function PillarCard({ pillarKey, Icon, index }) {
 export default function Technology() {
   const { t } = useTranslation();
   const [introRef, introVisible] = useScrollReveal();
+  const [closingRef, closingVisible] = useScrollReveal();
 
   return (
     <section id="technology" className="relative isolate scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
@@ -52,6 +53,13 @@ export default function Technology() {
           {technologyPillars.map((pillar, index) => (
             <PillarCard key={pillar.key} pillarKey={pillar.key} Icon={pillar.Icon} index={index} />
           ))}
+        </div>
+
+        <div
+          ref={closingRef}
+          className={`reveal mx-auto mt-16 max-w-2xl text-center ${closingVisible ? "reveal-visible" : ""}`}
+        >
+          <p className="text-sm leading-relaxed text-text-dim">{t("technology.closingNote")}</p>
         </div>
       </div>
     </section>

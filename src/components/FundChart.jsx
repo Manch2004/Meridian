@@ -6,9 +6,14 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
+  ReferenceLine,
   Tooltip,
 } from "recharts";
-import { fundUnitPriceHistory } from "../data/fundDemoData";
+import { treasuryPerformanceHistory } from "../data/fundDemoData";
+
+function formatPercent(value) {
+  return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
 
 function ChartTooltip({ active, payload, label }) {
   const { t } = useTranslation();
@@ -18,8 +23,8 @@ function ChartTooltip({ active, payload, label }) {
     <div className="gold-card px-3 py-2 text-sm shadow-lg">
       <p className="text-text-dim">{label}</p>
       <p className="mt-1 font-mono text-text-main">
-        {t("fund.chartTooltipUnitPrice")}:{" "}
-        <span className="text-gold-primary">${payload[0].value.toFixed(2)}</span>
+        {t("fund.chartTooltipPerformance")}:{" "}
+        <span className="text-gold-primary">{formatPercent(payload[0].value)}</span>
       </p>
     </div>
   );
@@ -28,9 +33,9 @@ function ChartTooltip({ active, payload, label }) {
 export default function FundChart() {
   const { t } = useTranslation();
 
-  const chartData = fundUnitPriceHistory.map((point) => ({
+  const chartData = treasuryPerformanceHistory.map((point) => ({
     ...point,
-    label: t(`fund.months.${point.monthKey}`),
+    label: t("fund.chartDayLabel", { day: point.day }),
   }));
 
   return (
@@ -50,14 +55,15 @@ export default function FundChart() {
             tick={{ fill: "#9a9fa8", fontSize: 12, fontFamily: "JetBrains Mono, monospace" }}
             tickLine={false}
             axisLine={false}
-            domain={["dataMin - 0.02", "dataMax + 0.02"]}
-            tickFormatter={(value) => `$${value.toFixed(2)}`}
+            domain={["dataMin - 0.05", "dataMax + 0.05"]}
+            tickFormatter={formatPercent}
             width={56}
           />
+          <ReferenceLine y={0} stroke="#9a9fa84d" strokeDasharray="3 3" />
           <Tooltip content={<ChartTooltip />} cursor={{ stroke: "#c9a2274d", strokeWidth: 1 }} />
           <Line
             type="monotone"
-            dataKey="unitPrice"
+            dataKey="performance"
             stroke="#c9a227"
             strokeWidth={2}
             dot={{ r: 3, fill: "#c9a227", strokeWidth: 0 }}

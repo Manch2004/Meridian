@@ -1,11 +1,31 @@
-import { Rocket, TrendingUp, Layers, Hexagon, Compass } from "lucide-react";
+import { Building2, Rocket, TrendingUp, Hexagon, Compass } from "lucide-react";
 
 const roadmapPhases = [
-  { key: "foundation", Icon: Rocket, status: "inProgress" },
-  { key: "growth", Icon: TrendingUp, status: "planned" },
-  { key: "ecosystemExpansion", Icon: Layers, status: "planned" },
-  { key: "tokenEcosystem", Icon: Hexagon, status: "planned" },
-  { key: "beyond", Icon: Compass, status: "planned" },
+  {
+    key: "infrastructure",
+    Icon: Building2,
+    items: ["treasuryModel", "app", "website", "telegram", "capitalization"],
+  },
+  {
+    key: "launch",
+    Icon: Rocket,
+    items: ["botActivation", "referralOnboarding", "initialStaking", "dailyWheel", "pointsLevels", "bonusEcosystem"],
+  },
+  {
+    key: "expansion",
+    Icon: TrendingUp,
+    items: ["treasuryGrowth", "participantCapacity", "depositNetworks", "stakingExpansion", "transparencyReporting", "aiExpansion"],
+  },
+  {
+    key: "web3",
+    Icon: Hexagon,
+    items: ["daoArchitecture", "tokenomics", "daoToken", "tokenUtility", "dropsLevels", "ecosystemAccess"],
+  },
+  {
+    key: "ecosystem",
+    Icon: Compass,
+    items: ["internationalExpansion", "fintechProducts", "aiSystems", "capitalProducts", "daoDevelopment", "blockchainIntegration"],
+  },
 ];
 
 export default roadmapPhases;

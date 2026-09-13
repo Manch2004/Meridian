@@ -14,7 +14,15 @@ export default function Footer() {
             <circle cx="12" cy="12" r="9" />
             <path d="M12 8v.01M12 11v5" strokeLinecap="round" />
           </svg>
-          <p>{t("footer.disclaimer")}</p>
+          <div>
+            <p>{t("footer.disclaimer")}</p>
+            <Link
+              to="/faq#risk-disclosure"
+              className="mt-2 inline-block text-xs font-medium text-gold-primary transition-colors hover:text-gold-light"
+            >
+              {t("footer.riskDisclosureLink")}
+            </Link>
+          </div>
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
@@ -23,6 +31,13 @@ export default function Footer() {
           </Link>
 
           <div className="flex items-center gap-4">
+            <Link
+              to="/support"
+              className="text-sm text-text-dim transition-colors hover:text-text-main"
+            >
+              {t("footer.support")}
+            </Link>
+
             <a
               href={TELEGRAM_URL}
               target="_blank"

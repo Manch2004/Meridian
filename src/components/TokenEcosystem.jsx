@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { AlertTriangle, Hexagon, PieChart, Gift, ArrowRight } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 import MeridianOrb from "./graphics/MeridianOrb";
+import daoPrinciples from "../data/daoPrinciples";
 
 const CONCEPTS = [
   { key: "futureToken", Icon: Hexagon },
@@ -39,6 +40,54 @@ function ConceptCard({ conceptKey, Icon, index }) {
       <p className="mt-2 text-sm leading-relaxed text-text-dim">
         {t(`token.concepts.${conceptKey}.description`)}
       </p>
+    </div>
+  );
+}
+
+function DaoCard({ principleKey, Icon, index }) {
+  const { t } = useTranslation();
+  const [ref, isVisible] = useScrollReveal();
+
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${index * 120}ms` }}
+      className={`gold-card reveal p-5 ${isVisible ? "reveal-visible" : ""}`}
+    >
+      <div className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-gold-primary/20 bg-gold-primary/12 text-gold-primary">
+        <Icon className="h-4 w-4" strokeWidth={1.75} />
+      </div>
+      <h3 className="mt-4 text-base font-semibold text-text-main">
+        {t(`token.dao.items.${principleKey}.title`)}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-text-dim">
+        {t(`token.dao.items.${principleKey}.description`)}
+      </p>
+    </div>
+  );
+}
+
+function DaoSection() {
+  const { t } = useTranslation();
+  const [headingRef, headingVisible] = useScrollReveal();
+
+  return (
+    <div className="mt-16">
+      <div
+        ref={headingRef}
+        className={`reveal mx-auto max-w-2xl text-center ${headingVisible ? "reveal-visible" : ""}`}
+      >
+        <h2 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
+          {t("token.dao.heading")}
+        </h2>
+        <p className="mt-5 text-base leading-relaxed text-text-secondary">{t("token.dao.intro")}</p>
+      </div>
+
+      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {daoPrinciples.map((principle, index) => (
+          <DaoCard key={principle.key} principleKey={principle.key} Icon={principle.Icon} index={index} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -99,7 +148,9 @@ export default function TokenEcosystem() {
           ))}
         </div>
 
-        <div className="relative isolate mt-12 overflow-hidden">
+        <DaoSection />
+
+        <div className="relative isolate mt-16 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 -z-10 hidden items-center justify-center sm:flex">
             <MeridianOrb size={420} opacity={0.07} speed={190} />
           </div>

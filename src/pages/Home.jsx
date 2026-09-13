@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ArrowRight, KeyRound, Wallet, CheckCircle2, Layers, BarChart3 } from "lucide-react";
+import { ArrowRight, Wallet, Layers, BarChart3, PercentCircle, ArrowUpFromLine } from "lucide-react";
 import Hero from "../components/Hero";
 import useScrollReveal from "../hooks/useScrollReveal";
 import technologyPillars from "../data/technologyPillars";
 
 const HOW_IT_WORKS_STEPS = [
-  { key: "access", Icon: KeyRound },
   { key: "deposit", Icon: Wallet },
-  { key: "confirmation", Icon: CheckCircle2 },
-  { key: "units", Icon: Layers },
-  { key: "portfolio", Icon: BarChart3 },
+  { key: "chooseProduct", Icon: Layers },
+  { key: "dailyPerformance", Icon: BarChart3 },
+  { key: "proportionalResult", Icon: PercentCircle },
+  { key: "withdraw", Icon: ArrowUpFromLine },
 ];
 
 function SectionHeading({ children }) {

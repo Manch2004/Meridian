@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { KeyRound, Wallet, CheckCircle2, Layers, BarChart3 } from "lucide-react";
+import { Wallet, Layers, BarChart3, PercentCircle, ArrowUpFromLine } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const STEPS = [
-  { key: "access", Icon: KeyRound },
   { key: "deposit", Icon: Wallet },
-  { key: "confirmation", Icon: CheckCircle2 },
-  { key: "units", Icon: Layers },
-  { key: "portfolio", Icon: BarChart3 },
+  { key: "chooseProduct", Icon: Layers },
+  { key: "dailyPerformance", Icon: BarChart3 },
+  { key: "proportionalResult", Icon: PercentCircle },
+  { key: "withdraw", Icon: ArrowUpFromLine },
 ];
 
 function Step({ stepKey, Icon, index }) {

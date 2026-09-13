@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { BrainCircuit, Building2, ArrowLeftRight } from "lucide-react";
+import { Landmark, Network, Users } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 import MeridianOrb from "./graphics/MeridianOrb";
 
 const PILLARS = [
-  { key: "ai", Icon: BrainCircuit },
-  { key: "exchanges", Icon: Building2 },
-  { key: "arbitrage", Icon: ArrowLeftRight },
+  { key: "treasury", Icon: Landmark },
+  { key: "infrastructure", Icon: Network },
+  { key: "participants", Icon: Users },
 ];
 
 function PillarCard({ pillarKey, Icon, index }) {
