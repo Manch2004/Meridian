@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { AlertTriangle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { AlertTriangle, CheckCircle2, Paperclip, X } from "lucide-react";
 import useScrollReveal from "../hooks/useScrollReveal";
 import useAuth from "../hooks/useAuth";
+import useProfile from "../hooks/useProfile";
 import { supabase } from "../lib/supabaseClient";
 import { TICKET_CATEGORIES } from "../data/ticketOptions";
 import SecurityNotice from "./SecurityNotice";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MESSAGE_MIN_LENGTH = 10;
+const MAX_ATTACHMENT_SIZE = 5 * 1024 * 1024;
+const ALLOWED_ATTACHMENT_TYPES = ["image/png", "image/jpeg", "image/webp", "application/pdf"];
 
-function buildInitialForm(userEmail) {
-  return {
-    category: TICKET_CATEGORIES[0].value,
-    meridianUsername: "",
-    name: "",
-    email: userEmail || "",
-    message: "",
-  };
-}
+const INITIAL_FORM = {
+  category: TICKET_CATEGORIES[0].value,
+  meridianUsername: "",
+  name: "",
+  email: "",
+  message: "",
+  attachment: null,
+};
 
 function validateForm(form, t) {
   const errors = {};
@@ -34,6 +36,14 @@ function validateForm(form, t) {
     errors.message = t("myTickets.new.errors.messageRequired");
   } else if (form.message.trim().length < MESSAGE_MIN_LENGTH) {
     errors.message = t("myTickets.new.errors.messageTooShort", { count: MESSAGE_MIN_LENGTH });
+  }
+
+  if (form.attachment) {
+    if (!ALLOWED_ATTACHMENT_TYPES.includes(form.attachment.type)) {
+      errors.attachment = t("myTickets.new.errors.attachmentInvalidType");
+    } else if (form.attachment.size > MAX_ATTACHMENT_SIZE) {
+      errors.attachment = t("myTickets.new.errors.attachmentTooLarge");
+    }
   }
 
   return errors;
@@ -59,18 +69,77 @@ function FormField({ id, label, error, children }) {
   );
 }
 
+async function uploadAttachment(ticketId, file) {
+  const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+  const path = `${ticketId}/${Date.now()}-${safeName}`;
+
+  const { error } = await supabase.storage.from("ticket-attachments").upload(path, file);
+  if (error) return null;
+
+  return path;
+}
+
+function TicketCreatedPanel({ ticket, isLoggedIn }) {
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col items-center gap-4 py-4 text-center">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold-primary/30 bg-gold-primary/12 text-gold-primary">
+        <CheckCircle2 className="h-6 w-6" strokeWidth={1.75} />
+      </div>
+      <p className="text-sm text-text-secondary">{t("myTickets.new.success.heading")}</p>
+      <p className="rounded-md border border-border-default bg-bg-secondary px-4 py-2 font-mono text-sm text-text-main">
+        {ticket.id}
+      </p>
+      <p className="max-w-sm text-sm leading-relaxed text-text-dim">
+        {isLoggedIn ? t("myTickets.new.success.loggedInNote") : t("myTickets.new.success.anonymousNote")}
+      </p>
+      {isLoggedIn && (
+        <Link
+          to={`/my-tickets/${ticket.id}`}
+          className="inline-flex items-center justify-center rounded-md bg-gold-primary px-6 py-2.5 text-sm font-semibold text-bg-primary transition-colors hover:bg-gold-light"
+        >
+          {t("myTickets.new.success.viewTicket")}
+        </Link>
+      )}
+    </div>
+  );
+}
+
 function NewTicketForm() {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
   const { user } = useAuth();
-  const [form, setForm] = useState(() => buildInitialForm(user?.email));
+  const { profile } = useProfile();
+  const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
+  const [createdTicket, setCreatedTicket] = useState(null);
+
+  useEffect(() => {
+    if (!user?.email) return;
+    setForm((current) => ({ ...current, email: current.email || user.email }));
+  }, [user]);
+
+  useEffect(() => {
+    if (!profile?.username) return;
+    setForm((current) => ({ ...current, meridianUsername: current.meridianUsername || profile.username }));
+  }, [profile]);
 
   const handleChange = (field) => (event) => {
     const { value } = event.target;
     setForm((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
+  };
+
+  const handleAttachmentChange = (event) => {
+    const file = event.target.files?.[0] || null;
+    setForm((current) => ({ ...current, attachment: file }));
+    setErrors((current) => ({ ...current, attachment: undefined }));
+  };
+
+  const clearAttachment = () => {
+    setForm((current) => ({ ...current, attachment: null }));
+    setErrors((current) => ({ ...current, attachment: undefined }));
   };
 
   const handleSubmit = async (event) => {
@@ -89,7 +158,7 @@ function NewTicketForm() {
     const { data: ticket, error: ticketError } = await supabase
       .from("tickets")
       .insert({
-        user_id: user.id,
+        user_id: user?.id ?? null,
         category: form.category,
         meridian_username: form.meridianUsername.trim() || null,
         name: form.name.trim() || null,
@@ -105,10 +174,16 @@ function NewTicketForm() {
       return;
     }
 
+    let attachmentUrl = null;
+    if (form.attachment) {
+      attachmentUrl = await uploadAttachment(ticket.id, form.attachment);
+    }
+
     const { error: messageError } = await supabase.from("ticket_messages").insert({
       ticket_id: ticket.id,
       sender_type: "user",
       message: form.message.trim(),
+      attachment_url: attachmentUrl,
     });
 
     if (messageError) {
@@ -117,11 +192,25 @@ function NewTicketForm() {
       return;
     }
 
-    navigate(`/my-tickets/${ticket.id}`);
+    setCreatedTicket(ticket);
+    setStatus("success");
   };
+
+  if (status === "success" && createdTicket) {
+    return <TicketCreatedPanel ticket={createdTicket} isLoggedIn={Boolean(user)} />;
+  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+      {!user && (
+        <p className="text-sm text-text-dim">
+          {t("myTickets.new.loginHint.text")}{" "}
+          <Link to="/login" className="font-medium text-gold-primary transition-colors hover:text-gold-light">
+            {t("myTickets.new.loginHint.link")}
+          </Link>
+        </p>
+      )}
+
       <FormField id="ticket-category" label={t("myTickets.new.fields.category.label")}>
         <select
           id="ticket-category"
@@ -186,6 +275,38 @@ function NewTicketForm() {
           aria-invalid={Boolean(errors.message)}
           className={`${fieldClassName(Boolean(errors.message))} resize-none`}
         />
+      </FormField>
+
+      <FormField
+        id="ticket-attachment"
+        label={t("myTickets.new.fields.attachment.label")}
+        error={errors.attachment}
+      >
+        {form.attachment ? (
+          <div className="flex items-center justify-between gap-3 rounded-md border border-border-default bg-bg-secondary px-4 py-3 text-sm text-text-main">
+            <span className="flex min-w-0 items-center gap-2">
+              <Paperclip className="h-4 w-4 flex-shrink-0 text-text-dim" strokeWidth={2} />
+              <span className="truncate">{form.attachment.name}</span>
+            </span>
+            <button
+              type="button"
+              onClick={clearAttachment}
+              aria-label={t("myTickets.new.fields.attachment.remove")}
+              className="flex-shrink-0 text-text-dim transition-colors hover:text-text-main"
+            >
+              <X className="h-4 w-4" strokeWidth={2} />
+            </button>
+          </div>
+        ) : (
+          <input
+            id="ticket-attachment"
+            type="file"
+            accept={ALLOWED_ATTACHMENT_TYPES.join(",")}
+            onChange={handleAttachmentChange}
+            className="block w-full text-sm text-text-dim file:mr-4 file:rounded-md file:border-0 file:bg-gold-primary/12 file:px-4 file:py-2 file:text-sm file:font-medium file:text-gold-primary hover:file:bg-gold-primary/20"
+          />
+        )}
+        <p className="mt-1.5 text-xs text-text-muted">{t("myTickets.new.fields.attachment.hint")}</p>
       </FormField>
 
       {errors.form && (

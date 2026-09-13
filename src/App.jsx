@@ -47,9 +47,12 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          {/* Open to everyone: Contact Support accepts a ticket with just a
+              contact email when there's no session, and auto-fills from the
+              account when there is one. */}
+          <Route path="/my-tickets/new" element={<NewTicket />} />
           <Route element={<RequireAuth />}>
             <Route path="/my-tickets" element={<MyTickets />} />
-            <Route path="/my-tickets/new" element={<NewTicket />} />
             <Route path="/my-tickets/:ticketId" element={<TicketDetail />} />
           </Route>
           <Route element={<RequireStaff />}>

@@ -68,6 +68,17 @@ to authenticated
 using (id = auth.uid())
 with check (id = auth.uid());
 
+-- Lets the admin ticket-reassignment picker list every support/admin
+-- profile to assign a ticket to -- without this, is_staff() would only see
+-- the caller's own row (the plain "own profile" policy above) and could
+-- never build a list of *other* staff.
+drop policy if exists "staff can view all profiles" on public.profiles;
+create policy "staff can view all profiles"
+on public.profiles
+for select
+to authenticated
+using (public.is_staff());
+
 -- Auto-create a profile row whenever a new user signs up.
 create or replace function public.handle_new_user()
 returns trigger
@@ -147,7 +158,7 @@ create table if not exists public.tickets (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid references auth.users(id) on delete cascade,
   meridian_username text,
   name text,
   email text,
@@ -178,6 +189,21 @@ create table if not exists public.tickets (
 -- exists without user_id: adds the column, but leaves it nullable since a
 -- NOT NULL backfill would require picking an owner for pre-existing rows.
 alter table public.tickets add column if not exists user_id uuid references auth.users(id) on delete cascade;
+
+-- Upgrade path if an earlier version of this table has user_id as NOT NULL
+-- (tickets tied to an account only). The Contact Support form now also
+-- accepts submissions with no Meridian account (user_id null), identified
+-- instead by the contact email the visitor typed in -- so the column has to
+-- allow null.
+alter table public.tickets alter column user_id drop not null;
+
+-- A ticket must be traceable to *someone*: either an account (user_id) or a
+-- contact email typed into the anonymous Contact Support form. Named (rather
+-- than inline in the create table above) so it applies the same way to a
+-- table that already existed before this constraint was introduced.
+alter table public.tickets drop constraint if exists tickets_user_id_or_email_check;
+alter table public.tickets add constraint tickets_user_id_or_email_check
+  check (user_id is not null or (email is not null and length(trim(email)) > 0));
 
 create index if not exists tickets_user_id_idx on public.tickets(user_id);
 
@@ -273,6 +299,27 @@ with check (
   and assigned_to is null
 );
 
+-- Contact Support also accepts a ticket from a visitor with no Meridian
+-- account -- identified only by the email they typed into the form
+-- (user_id stays null). There is no anonymous SELECT/UPDATE policy: an
+-- anonymous submitter can't read their ticket back through this app (no
+-- session to prove ownership with), so follow-up happens over email/staff
+-- reply rather than My Tickets. Practically, the ticket_id UUID doubles as
+-- an unguessable token -- the same trust model the storage policies below
+-- already use for ticket folders.
+drop policy if exists "anonymous can create a ticket with a contact email" on public.tickets;
+create policy "anonymous can create a ticket with a contact email"
+on public.tickets
+for insert
+to anon
+with check (
+  user_id is null
+  and email is not null
+  and length(trim(email)) > 0
+  and status = 'Open'
+  and assigned_to is null
+);
+
 drop policy if exists "users can view their own tickets" on public.tickets;
 create policy "users can view their own tickets"
 on public.tickets
@@ -335,6 +382,22 @@ for insert
 to authenticated
 with check (sender_type = 'support' and public.is_staff());
 
+-- Mirrors "anonymous can create a ticket with a contact email" above: the
+-- Contact Support form inserts the ticket's opening message in the same
+-- request, before the visitor has any session to prove ownership with.
+drop policy if exists "anonymous can add the initial message to an anonymous ticket" on public.ticket_messages;
+create policy "anonymous can add the initial message to an anonymous ticket"
+on public.ticket_messages
+for insert
+to anon
+with check (
+  sender_type = 'user'
+  and exists (
+    select 1 from public.tickets t
+    where t.id = ticket_id and t.user_id is null
+  )
+);
+
 -- ---------------------------------------------------------------------------
 -- Storage: ticket-attachments bucket
 --
@@ -381,6 +444,24 @@ on storage.objects
 for select
 to authenticated
 using (bucket_id = 'ticket-attachments' and public.is_staff());
+
+-- Mirrors the anonymous ticket/message policies above: an anonymous Contact
+-- Support submission can still attach a screenshot, uploaded into that same
+-- (ownerless) ticket's folder. No anonymous SELECT policy -- same reasoning
+-- as tickets/ticket_messages, the visitor has no session to read it back
+-- with through this app.
+drop policy if exists "anonymous can upload an attachment into an anonymous ticket folder" on storage.objects;
+create policy "anonymous can upload an attachment into an anonymous ticket folder"
+on storage.objects
+for insert
+to anon
+with check (
+  bucket_id = 'ticket-attachments'
+  and exists (
+    select 1 from public.tickets t
+    where t.id::text = (storage.foldername(name))[1] and t.user_id is null
+  )
+);
 
 -- ---------------------------------------------------------------------------
 -- AI chat

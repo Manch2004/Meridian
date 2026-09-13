@@ -474,9 +474,18 @@
     },
     "form": {
       "fields": {
-        "name": { "label": "Name", "placeholder": "Your name" },
-        "email": { "label": "Email", "placeholder": "you@example.com" },
-        "message": { "label": "Message", "placeholder": "How can we help?" }
+        "name": {
+          "label": "Name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "How can we help?"
+        }
       },
       "errors": {
         "nameRequired": "Please enter your name.",
@@ -496,7 +505,215 @@
       "description": "Chat with the Meridian team and community directly.",
       "link": "Chat with us on Telegram"
     },
-    "faqNote": "Looking for quick answers? Check our FAQ"
+    "faqNote": "Looking for quick answers? Check our FAQ",
+    "faq": {
+      "searchPlaceholder": "Search for an answer...",
+      "allCategories": "All",
+      "noResults": "No matching questions. Try a different search or ask the AI Assistant below.",
+      "askAi": "Ask AI Assistant",
+      "categories": {
+        "accountVerification": {
+          "items": {
+            "howToVerify": {
+              "question": "How do I verify my Meridian account?",
+              "answer": "Verification confirms your identity and unlocks full account access, including deposits and withdrawals. Submit the requested details in the Meridian App and our team will review them."
+            },
+            "forgotPassword": {
+              "question": "I forgot my password. How do I reset it?",
+              "answer": "Use the password reset option on the Log In page to receive a reset link by email. If it doesn't arrive, check your spam folder or open a support ticket."
+            },
+            "changeEmailUsername": {
+              "question": "Can I change my email address or Meridian username?",
+              "answer": "Open a support ticket with your request, and our team will help update your account details after verifying your identity."
+            },
+            "accountAccessIssue": {
+              "question": "I can't access my account — what should I do?",
+              "answer": "Open a support ticket describing the issue (error message, device, browser) so our team can investigate and help restore access."
+            }
+          }
+        },
+        "deposit": {
+          "items": {
+            "howToDeposit": {
+              "question": "How do I make a deposit?",
+              "answer": "Deposit a supported digital asset, such as USDT (TRC20), from the Meridian App to your account address."
+            },
+            "depositNotShowing": {
+              "question": "My deposit isn't showing in my balance yet.",
+              "answer": "Deposits are credited once the network confirms the transaction. If it hasn't appeared after the expected confirmation time, open a ticket with your transaction hash (TXID)."
+            },
+            "whichAssets": {
+              "question": "Which digital assets can I deposit?",
+              "answer": "Meridian currently supports USDT (TRC20). Additional assets and deposit networks are planned as the ecosystem expands."
+            },
+            "minimumDeposit": {
+              "question": "Is there a minimum deposit amount?",
+              "answer": "Minimum deposit amounts can depend on the staking product you choose — check the Meridian App for current limits."
+            }
+          }
+        },
+        "withdrawal": {
+          "items": {
+            "howWithdrawalWorks": {
+              "question": "How does withdrawal work?",
+              "answer": "Once your staking period ends, your balance becomes eligible for withdrawal, subject to a 30-day lock-up period."
+            },
+            "withdrawalPending": {
+              "question": "My withdrawal request is still pending — how long does it take?",
+              "answer": "Processing times can vary. If it's taking longer than expected, open a ticket with your request details so we can check its status."
+            },
+            "withdrawalFees": {
+              "question": "Are there fees for withdrawing?",
+              "answer": "Withdrawals may be subject to network fees. Meridian's performance fee applies only to generated profit, never to your deposited capital."
+            },
+            "cancelWithdrawal": {
+              "question": "Can I cancel a withdrawal request?",
+              "answer": "Contact Support as soon as possible after submitting a request — we can only cancel it if it hasn't been processed yet."
+            }
+          }
+        },
+        "staking": {
+          "items": {
+            "stakingProductsList": {
+              "question": "What staking products does Meridian offer?",
+              "answer": "Flexible (no fixed period), 1-Day, 1-Week and 1-Month — a longer commitment lowers the performance fee."
+            },
+            "performanceFeeMeaning": {
+              "question": "What is the performance fee?",
+              "answer": "It's Meridian's share of the profit generated on a position — never an interest rate or a promised return."
+            },
+            "switchStakingProduct": {
+              "question": "Can I switch staking products?",
+              "answer": "You can start a new position in a different product from the Meridian App. Check your current position's terms before switching."
+            },
+            "stakingLossRisk": {
+              "question": "Can I lose money while staking?",
+              "answer": "Financial investments involve risk, and results are never guaranteed. Review the full risk disclosure on the FAQ page before participating."
+            }
+          }
+        },
+        "bonusesPoints": {
+          "items": {
+            "bonusTypes": {
+              "question": "What bonuses does Meridian offer?",
+              "answer": "Registration, verification, first deposit, referral, and staking bonuses — see the Bonus Ecosystem page for details."
+            },
+            "howPointsEarned": {
+              "question": "How do I earn Meridian Points?",
+              "answer": "Through staking, account activity, referrals, verification, deposits, ecosystem participation, and tasks & campaigns."
+            },
+            "meridianLevels": {
+              "question": "What are Meridian Levels?",
+              "answer": "As your Points accumulate, you progress through five levels — from Bronze to Obsidian — unlocking expanded ecosystem benefits."
+            },
+            "dailyWheel": {
+              "question": "What is the Meridian Daily Wheel?",
+              "answer": "Eligible users can spin the Wheel once a day for a chance at rewards, bonuses and other ecosystem benefits."
+            }
+          }
+        },
+        "referralSystem": {
+          "items": {
+            "howReferralWorks": {
+              "question": "How does the referral system work?",
+              "answer": "Share your referral link or code from the Meridian App. When someone joins using it, you can earn a referral bonus."
+            },
+            "referralBonusAmount": {
+              "question": "How much can I earn from referrals?",
+              "answer": "Referral bonus amounts and terms may evolve as the ecosystem develops — check the Bonus Ecosystem page and the Meridian App for current details."
+            },
+            "referralNotCredited": {
+              "question": "My referral bonus wasn't credited.",
+              "answer": "Open a support ticket with your referral code and the referred account's details so our team can look into it."
+            },
+            "multipleReferrals": {
+              "question": "Is there a limit to how many people I can refer?",
+              "answer": "There's no fixed limit today — you can share your referral link with as many people as you'd like."
+            }
+          }
+        },
+        "meridianFund": {
+          "items": {
+            "whatIsFund": {
+              "question": "What is the Meridian Treasury?",
+              "answer": "Meridian's Treasury holds operating capital and deploys it across digital asset markets. Its daily performance forms the basis for results on eligible staking positions."
+            },
+            "howPerformanceCalculated": {
+              "question": "How is Treasury performance calculated?",
+              "answer": "Meridian calculates the Treasury's actual daily performance, and eligible staking positions receive a proportional result, minus Meridian's performance fee."
+            },
+            "pastPerformanceGuarantee": {
+              "question": "Does past performance guarantee future results?",
+              "answer": "No. Past performance never guarantees future performance, and all figures remain subject to market risk."
+            },
+            "fundTransparency": {
+              "question": "Where can I see the Treasury's performance?",
+              "answer": "Visit the Treasury Performance page for the latest performance chart (demo data shown until live reporting launches)."
+            }
+          }
+        },
+        "technicalProblems": {
+          "items": {
+            "appNotLoading": {
+              "question": "The Meridian App or website isn't loading — what should I do?",
+              "answer": "Try refreshing the page, clearing your browser cache, or checking your connection. If the problem continues, open a ticket with screenshots and your device/browser details."
+            },
+            "loginError": {
+              "question": "I'm getting an error when trying to log in.",
+              "answer": "Double-check your email and password, then try resetting your password. If the error persists, open a ticket with the exact error message."
+            },
+            "transactionStuck": {
+              "question": "A transaction appears stuck or unconfirmed.",
+              "answer": "Open a ticket with the transaction hash (TXID) and network used so our team can investigate."
+            },
+            "reportBug": {
+              "question": "How do I report a bug?",
+              "answer": "Open a support ticket under Technical Problems with steps to reproduce the issue and a screenshot, if possible."
+            }
+          }
+        },
+        "security": {
+          "items": {
+            "accountSecurityTips": {
+              "question": "How do I keep my account secure?",
+              "answer": "Use a strong, unique password, never share your password or verification codes, and always confirm you're on Meridian's official site or app before entering credentials."
+            },
+            "neverAskCredentials": {
+              "question": "Would Meridian ever ask for my password or seed phrase?",
+              "answer": "No. Meridian staff will never ask for your password, private key or seed phrase — not by email, in a support ticket, or anywhere else."
+            },
+            "suspiciousActivity": {
+              "question": "I noticed suspicious activity on my account — what should I do?",
+              "answer": "Change your password immediately and open a support ticket under Security so our team can investigate."
+            },
+            "walletSecurityInfra": {
+              "question": "How does Meridian secure Treasury funds?",
+              "answer": "Capital is distributed across multiple infrastructure types — exchanges, wallets and P2P platforms — with restricted, access-controlled infrastructure to reduce single-point-of-failure risk."
+            }
+          }
+        },
+        "other": {
+          "items": {
+            "contactMethods": {
+              "question": "What are the ways I can contact Meridian?",
+              "answer": "Ask the AI Assistant for quick answers, open a support ticket for tracked help, or join Meridian's Telegram for community updates."
+            },
+            "languageSupport": {
+              "question": "What languages are supported?",
+              "answer": "The Meridian website and support are available in English, Armenian and Russian."
+            },
+            "futureFeatures": {
+              "question": "What's coming next for Meridian?",
+              "answer": "Check the Roadmap page for planned phases, from infrastructure and launch to expansion, Web3 and ecosystem growth."
+            },
+            "generalOther": {
+              "question": "My question isn't listed here — what should I do?",
+              "answer": "Ask the AI Assistant, or open a support ticket under \"Other\" and our team will help."
+            }
+          }
+        }
+      }
+    }
   },
   "auth": {
     "login": {
@@ -589,21 +806,52 @@
       "heading": "Open a Support Ticket",
       "intro": "Tell us what's going on and we'll get back to you here.",
       "fields": {
-        "category": { "label": "Category" },
-        "meridianUsername": { "label": "Meridian Username (optional)", "placeholder": "Your Meridian username" },
-        "name": { "label": "Name (optional)", "placeholder": "Your name" },
-        "email": { "label": "Email", "placeholder": "you@example.com" },
-        "message": { "label": "Message", "placeholder": "Describe your issue in detail" }
+        "category": {
+          "label": "Category"
+        },
+        "meridianUsername": {
+          "label": "Meridian Username (optional)",
+          "placeholder": "Your Meridian username"
+        },
+        "name": {
+          "label": "Name (optional)",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Describe your issue in detail"
+        },
+        "attachment": {
+          "label": "Screenshot / Attachment (optional)",
+          "hint": "Images or PDF, up to 5 MB.",
+          "remove": "Remove attachment"
+        }
       },
       "errors": {
         "emailRequired": "Please enter your email address.",
         "emailInvalid": "Please enter a valid email address.",
         "messageRequired": "Please enter a message.",
         "messageTooShort": "Message must be at least {{count}} characters.",
-        "generic": "Something went wrong. Please try again."
+        "generic": "Something went wrong. Please try again.",
+        "attachmentInvalidType": "Only images (PNG, JPEG, WEBP) or PDF files are supported.",
+        "attachmentTooLarge": "Attachment must be smaller than 5 MB."
       },
       "submit": "Submit Ticket",
-      "submitting": "Submitting..."
+      "submitting": "Submitting...",
+      "loginHint": {
+        "text": "Have a Meridian account?",
+        "link": "Log in to auto-fill your details."
+      },
+      "success": {
+        "heading": "Your ticket has been created.",
+        "loggedInNote": "You can track its status and reply to our team anytime from My Tickets.",
+        "anonymousNote": "Save this ticket ID — since you're not logged in, our team will follow up by email. Create an account anytime to track tickets from My Tickets.",
+        "viewTicket": "View Ticket"
+      }
     },
     "detail": {
       "back": "Back to My Tickets",
@@ -615,7 +863,8 @@
       "replyPlaceholder": "Write a reply...",
       "replyError": "Something went wrong sending your reply. Please try again.",
       "reply": "Send Reply",
-      "sending": "Sending..."
+      "sending": "Sending...",
+      "attachment": "View attachment"
     }
   },
   "admin": {
@@ -649,7 +898,12 @@
       "replyPlaceholder": "Write a reply to the customer...",
       "replyError": "Something went wrong sending your reply. Please try again.",
       "reply": "Send Reply",
-      "sending": "Sending..."
+      "sending": "Sending...",
+      "reassign": {
+        "label": "Assigned to",
+        "unassigned": "Unassigned",
+        "you": "(you)"
+      }
     }
   },
   "aiChat": {
@@ -660,7 +914,8 @@
     "open": "Open chat",
     "close": "Close chat",
     "thinking": "Thinking...",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "contactSupport": "Still need help? Contact Support"
   },
   "footer": {
     "telegram": "Telegram",

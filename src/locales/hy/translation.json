@@ -474,9 +474,18 @@
     },
     "form": {
       "fields": {
-        "name": { "label": "Անուն", "placeholder": "Ձեր անունը" },
-        "email": { "label": "Էլ. հասցե", "placeholder": "you@example.com" },
-        "message": { "label": "Հաղորդագրություն", "placeholder": "Նկարագրեք ձեր հարցը կամ մտահոգությունը" }
+        "name": {
+          "label": "Անուն",
+          "placeholder": "Ձեր անունը"
+        },
+        "email": {
+          "label": "Էլ. հասցե",
+          "placeholder": "you@example.com"
+        },
+        "message": {
+          "label": "Հաղորդագրություն",
+          "placeholder": "Նկարագրեք ձեր հարցը կամ մտահոգությունը"
+        }
       },
       "errors": {
         "nameRequired": "Խնդրում ենք նշել ձեր անունը։",
@@ -496,7 +505,215 @@
       "description": "Զրուցեք Meridian-ի թիմի և համայնքի հետ ուղղակիորեն։",
       "link": "Բացել Telegram-ը"
     },
-    "faqNote": "Փնտրում եք արագ պատասխաններ։ Դիտեք մեր ՀՏՀ բաժինը"
+    "faqNote": "Փնտրում եք արագ պատասխաններ։ Դիտեք մեր ՀՏՀ բաժինը",
+    "faq": {
+      "searchPlaceholder": "Փնտրեք պատասխան...",
+      "allCategories": "Բոլորը",
+      "noResults": "Համապատասխան հարց չի գտնվել։ Փորձեք այլ որոնում կամ հարցրեք ստորև գտնվող AI Assistant-ին։",
+      "askAi": "Հարցնել AI Assistant-ին",
+      "categories": {
+        "accountVerification": {
+          "items": {
+            "howToVerify": {
+              "question": "Ինչպե՞ս վավերացնեմ իմ Meridian հաշիվը։",
+              "answer": "Վավերացումը հաստատում է ձեր ինքնությունը և բացում է հաշվի ամբողջական հասանելիությունը, այդ թվում՝ ավանդներ և դուրսբերումներ։ Ուղարկեք պահանջվող տվյալները Meridian App-ում, և մեր թիմը կստուգի դրանք։"
+            },
+            "forgotPassword": {
+              "question": "Մոռացել եմ գաղտնաբառս։ Ինչպե՞ս վերականգնեմ։",
+              "answer": "Օգտագործեք Log In էջի password reset տարբերակը՝ email-ով reset link ստանալու համար։ Եթե չի ստացվում, ստուգեք spam թղթապանակը կամ բացեք support ticket։"
+            },
+            "changeEmailUsername": {
+              "question": "Կարո՞ղ եմ փոխել իմ email հասցեն կամ Meridian username-ը։",
+              "answer": "Բացեք support ticket ձեր հարցումով, և մեր թիմը կօգնի թարմացնել ձեր հաշվի տվյալները՝ ձեր ինքնությունը հաստատելուց հետո։"
+            },
+            "accountAccessIssue": {
+              "question": "Չեմ կարողանում մուտք գործել իմ հաշիվ — ի՞նչ անեմ։",
+              "answer": "Բացեք support ticket՝ նկարագրելով խնդիրը (սխալի հաղորդագրություն, սարք, browser), որպեսզի մեր թիմը ուսումնասիրի և օգնի վերականգնել հասանելիությունը։"
+            }
+          }
+        },
+        "deposit": {
+          "items": {
+            "howToDeposit": {
+              "question": "Ինչպե՞ս կատարեմ ավանդ։",
+              "answer": "Ավանդադրեք աջակցվող digital asset, օրինակ՝ USDT (TRC20), Meridian App-ից ձեր հաշվի հասցեին։"
+            },
+            "depositNotShowing": {
+              "question": "Իմ ավանդը դեռ չի երևում իմ հաշվեկշռում։",
+              "answer": "Ավանդները հաշվեգրվում են, երբ ցանցը հաստատում է գործարքը։ Եթե ակնկալվող ժամանակից հետո չի երևում, բացեք ticket՝ նշելով ձեր transaction hash-ը (TXID)։"
+            },
+            "whichAssets": {
+              "question": "Ո՞ր digital asset-երն եմ կարող ավանդադրել։",
+              "answer": "Meridian-ն այժմ աջակցում է USDT (TRC20)։ Լրացուցիչ asset-ներ և deposit ցանցեր նախատեսվում են, ինչպես էկոհամակարգը ընդլայնվում է։"
+            },
+            "minimumDeposit": {
+              "question": "Կա՞ նվազագույն ավանդի գումար։",
+              "answer": "Նվազագույն ավանդի գումարը կարող է կախված լինել ձեր ընտրած staking product-ից — ընթացիկ սահմանաչափերի համար ստուգեք Meridian App-ը։"
+            }
+          }
+        },
+        "withdrawal": {
+          "items": {
+            "howWithdrawalWorks": {
+              "question": "Ինչպե՞ս է աշխատում դուրսբերումը։",
+              "answer": "Երբ ձեր staking ժամկետը ավարտվում է, ձեր հաշվեկշիռը դառնում է իրավասու դուրսբերման համար՝ ենթակա 30-օրյա lock-up ժամանակահատվածի։"
+            },
+            "withdrawalPending": {
+              "question": "Իմ դուրսբերման հայտը դեռ pending է — որքա՞ն ժամանակ է պահանջվում։",
+              "answer": "Մշակման ժամանակը կարող է տարբեր լինել։ Եթե ակնկալվածից ավելի է տևում, բացեք ticket՝ ձեր հայտի մանրամասներով, որպեսզի ստուգենք դրա կարգավիճակը։"
+            },
+            "withdrawalFees": {
+              "question": "Դուրսբերման համար հանձնավճա՞ր կա։",
+              "answer": "Դուրսբերումները կարող են ենթակա լինել ցանցային վճարների։ Meridian-ի performance fee-ն կիրառվում է միայն generated profit-ի վրա, երբեք՝ ձեր ավանդադրված կապիտալի։"
+            },
+            "cancelWithdrawal": {
+              "question": "Կարո՞ղ եմ չեղարկել դուրսբերման հայտը։",
+              "answer": "Հայտն ուղարկելուց հետո հնարավորինս շուտ կապվեք Support-ի հետ — կարող ենք չեղարկել այն միայն այն դեպքում, եթե դեռ մշակված չէ։"
+            }
+          }
+        },
+        "staking": {
+          "items": {
+            "stakingProductsList": {
+              "question": "Ի՞նչ staking product-ներ է առաջարկում Meridian-ը։",
+              "answer": "Flexible (առանց ֆիքսված ժամկետի), 1-Day, 1-Week և 1-Month — ավելի երկար պարտավորությունը նվազեցնում է performance fee-ն։"
+            },
+            "performanceFeeMeaning": {
+              "question": "Ի՞նչ է performance fee-ն։",
+              "answer": "Դա Meridian-ի բաժինն է դիրքի վրա գեներացված շահույթից — երբեք տոկոսադրույք կամ խոստացված եկամուտ չէ։"
+            },
+            "switchStakingProduct": {
+              "question": "Կարո՞ղ եմ փոխել staking product-ը։",
+              "answer": "Կարող եք սկսել նոր դիրք այլ product-ով Meridian App-ից։ Փոխելուց առաջ ստուգեք ձեր ընթացիկ դիրքի պայմանները։"
+            },
+            "stakingLossRisk": {
+              "question": "Կարո՞ղ եմ գումար կորցնել staking-ի ընթացքում։",
+              "answer": "Ֆինանսական ներդրումները ռիսկ են պարունակում, և արդյունքները երբեք չեն երաշխավորվում։ Մասնակցելուց առաջ ուսումնասիրեք ամբողջական ռիսկերի բացահայտումը FAQ էջում։"
+            }
+          }
+        },
+        "bonusesPoints": {
+          "items": {
+            "bonusTypes": {
+              "question": "Ի՞նչ բոնուսներ է առաջարկում Meridian-ը։",
+              "answer": "Գրանցման, վավերացման, առաջին ավանդի, ուղեգրման և staking բոնուսներ — մանրամասների համար տեսեք Bonus Ecosystem էջը։"
+            },
+            "howPointsEarned": {
+              "question": "Ինչպե՞ս եմ վաստակում Meridian Points։",
+              "answer": "Staking-ի, հաշվի ակտիվության, ուղեգրումների, վավերացման, ավանդների, էկոհամակարգին մասնակցության և առաջադրանքների ու արշավների միջոցով։"
+            },
+            "meridianLevels": {
+              "question": "Ի՞նչ են Meridian Levels-ը։",
+              "answer": "Ձեր Points-ի կուտակմանը զուգահեռ՝ դուք անցնում եք հինգ մակարդակով՝ Բրոնզից մինչև Օբսիդիան, բացելով էկոհամակարգի ընդլայնված առավելություններ։"
+            },
+            "dailyWheel": {
+              "question": "Ի՞նչ է Meridian Daily Wheel-ը։",
+              "answer": "Իրավասու օգտատերերը կարող են օրը մեկ անգամ պտտել Wheel-ը՝ պարգևներ, բոնուսներ և էկոհամակարգի այլ առավելություններ ստանալու հնարավորության համար։"
+            }
+          }
+        },
+        "referralSystem": {
+          "items": {
+            "howReferralWorks": {
+              "question": "Ինչպե՞ս է աշխատում ուղեգրման համակարգը։",
+              "answer": "Կիսվեք ձեր referral link-ով կամ կոդով Meridian App-ից։ Երբ ինչ-որ մեկը միանում է դրանով, դուք կարող եք վաստակել ուղեգրման բոնուս։"
+            },
+            "referralBonusAmount": {
+              "question": "Որքա՞ն կարող եմ վաստակել ուղեգրումներից։",
+              "answer": "Ուղեգրման բոնուսի չափերը և պայմանները կարող են փոփոխվել, ինչպես էկոհամակարգը զարգանում է — ընթացիկ մանրամասների համար ստուգեք Bonus Ecosystem էջը և Meridian App-ը։"
+            },
+            "referralNotCredited": {
+              "question": "Իմ ուղեգրման բոնուսը չի հաշվեգրվել։",
+              "answer": "Բացեք support ticket՝ ձեր referral կոդով և ուղեգրված հաշվի տվյալներով, որպեսզի մեր թիմը ուսումնասիրի։"
+            },
+            "multipleReferrals": {
+              "question": "Կա՞ սահմանաչափ, թե քանի հոգու կարող եմ ուղեգրել։",
+              "answer": "Այսօր ֆիքսված սահմանաչափ չկա — կարող եք կիսվել ձեր referral link-ով այնքան մարդկանց հետ, որքան ցանկանում եք։"
+            }
+          }
+        },
+        "meridianFund": {
+          "items": {
+            "whatIsFund": {
+              "question": "Ի՞նչ է Meridian Treasury-ն։",
+              "answer": "Meridian-ի Treasury-ն պահում է գործառնական կապիտալը և տեղաբաշխում է այն digital asset շուկաներում։ Դրա օրական արդյունքը հիմք է հանդիսանում իրավասու staking դիրքերի արդյունքի համար։"
+            },
+            "howPerformanceCalculated": {
+              "question": "Ինչպե՞ս է հաշվարկվում Treasury-ի արդյունքը։",
+              "answer": "Meridian-ը հաշվարկում է Treasury-ի իրական օրական արդյունքը, և իրավասու staking դիրքերը ստանում են համամասնական արդյունք՝ մինուս Meridian-ի performance fee-ն։"
+            },
+            "pastPerformanceGuarantee": {
+              "question": "Անցյալի արդյունքները երաշխավորու՞մ են ապագա արդյունքները։",
+              "answer": "Ոչ։ Անցյալի ցուցանիշները երբեք չեն երաշխավորում ապագա արդյունքները, և բոլոր տվյալները մնում են ենթակա շուկայական ռիսկի։"
+            },
+            "fundTransparency": {
+              "question": "Որտե՞ղ կարող եմ տեսնել Treasury-ի արդյունքները։",
+              "answer": "Այցելեք Treasury Performance էջը՝ վերջին performance chart-ի համար (դեմո տվյալներ ցուցադրվում են, մինչև live reporting-ի մեկնարկը)։"
+            }
+          }
+        },
+        "technicalProblems": {
+          "items": {
+            "appNotLoading": {
+              "question": "Meridian App-ը կամ կայքը չի բացվում — ի՞նչ անեմ։",
+              "answer": "Փորձեք թարմացնել էջը, մաքրել browser cache-ը կամ ստուգել ձեր ինտերնետ կապը։ Եթե խնդիրը շարունակվում է, բացեք ticket՝ screenshot-ներով և ձեր սարքի/browser-ի մանրամասներով։"
+            },
+            "loginError": {
+              "question": "Log in-ի ժամանակ սխալ եմ ստանում։",
+              "answer": "Կրկին ստուգեք ձեր email-ը և գաղտնաբառը, հետո փորձեք reset անել գաղտնաբառը։ Եթե սխալը շարունակվում է, բացեք ticket՝ ճշգրիտ սխալի հաղորդագրությամբ։"
+            },
+            "transactionStuck": {
+              "question": "Գործարքը կարծես կանգնած է կամ չհաստատված։",
+              "answer": "Բացեք ticket՝ transaction hash-ով (TXID) և օգտագործված ցանցով, որպեսզի մեր թիմը ուսումնասիրի։"
+            },
+            "reportBug": {
+              "question": "Ինչպե՞ս հայտնեմ bug-ի մասին։",
+              "answer": "Բացեք support ticket Technical Problems կատեգորիայում՝ խնդիրը վերարտադրելու քայլերով և, հնարավորության դեպքում, screenshot-ով։"
+            }
+          }
+        },
+        "security": {
+          "items": {
+            "accountSecurityTips": {
+              "question": "Ինչպե՞ս պահպանեմ իմ հաշվի անվտանգությունը։",
+              "answer": "Օգտագործեք ուժեղ, եզակի գաղտնաբառ, երբեք մի կիսվեք ձեր գաղտնաբառով կամ վավերացման կոդերով, և միշտ համոզվեք, որ գտնվում եք Meridian-ի պաշտոնական կայքում կամ app-ում՝ նախքան տվյալներ մուտքագրելը։"
+            },
+            "neverAskCredentials": {
+              "question": "Meridian-ը երբևէ կպահանջի՞ իմ գաղտնաբառը կամ seed phrase-ը։",
+              "answer": "Ոչ։ Meridian-ի staff-ը երբեք չի պահանջի ձեր գաղտնաբառը, private key-ը կամ seed phrase-ը — ոչ email-ով, ոչ support ticket-ում, ոչ մի այլ տեղ։"
+            },
+            "suspiciousActivity": {
+              "question": "Նկատել եմ կասկածելի ակտիվություն իմ հաշվում — ի՞նչ անեմ։",
+              "answer": "Անմիջապես փոխեք ձեր գաղտնաբառը և բացեք support ticket Security կատեգորիայում, որպեսզի մեր թիմը ուսումնասիրի։"
+            },
+            "walletSecurityInfra": {
+              "question": "Ինչպե՞ս է Meridian-ը պաշտպանում Treasury-ի միջոցները։",
+              "answer": "Կապիտալը բաշխված է մի քանի տեսակի ենթակառուցվածքների միջև՝ բորսաներ, դրամապանակներ և P2P հարթակներ, սահմանափակ և հասանելիության վերահսկմամբ ենթակառուցվածքով՝ կենտրոնացված ձախողման ռիսկը նվազեցնելու համար։"
+            }
+          }
+        },
+        "other": {
+          "items": {
+            "contactMethods": {
+              "question": "Ի՞նչ եղանակներով կարող եմ կապվել Meridian-ի հետ։",
+              "answer": "Հարցրեք AI Assistant-ին արագ պատասխանների համար, բացեք support ticket հետևելի օգնության համար, կամ միացեք Meridian-ի Telegram-ին համայնքային թարմացումների համար։"
+            },
+            "languageSupport": {
+              "question": "Ի՞նչ լեզուներ են աջակցվում։",
+              "answer": "Meridian-ի կայքը և support-ը հասանելի են անգլերեն, հայերեն և ռուսերեն լեզուներով։"
+            },
+            "futureFeatures": {
+              "question": "Ի՞նչ է սպասվում Meridian-ի հաջորդ քայլերում։",
+              "answer": "Տեսեք Roadmap էջը՝ պլանավորված փուլերի համար, ենթակառուցվածքից և գործարկումից մինչև ընդլայնում, Web3 և էկոհամակարգի աճ։"
+            },
+            "generalOther": {
+              "question": "Իմ հարցը այստեղ չկա — ի՞նչ անեմ։",
+              "answer": "Հարցրեք AI Assistant-ին, կամ բացեք support ticket «Other» կատեգորիայում, և մեր թիմը կօգնի։"
+            }
+          }
+        }
+      }
+    }
   },
   "auth": {
     "login": {
@@ -589,21 +806,52 @@
       "heading": "Բացել Support Ticket",
       "intro": "Պատմեք, թե ինչ է կատարվում, և մենք կպատասխանենք այստեղ։",
       "fields": {
-        "category": { "label": "Կատեգորիա" },
-        "meridianUsername": { "label": "Meridian Username (ոչ պարտադիր)", "placeholder": "Ձեր Meridian username-ը" },
-        "name": { "label": "Անուն (ոչ պարտադիր)", "placeholder": "Ձեր անունը" },
-        "email": { "label": "Էլ. հասցե", "placeholder": "you@example.com" },
-        "message": { "label": "Հաղորդագրություն", "placeholder": "Մանրամասն նկարագրեք ձեր խնդիրը" }
+        "category": {
+          "label": "Կատեգորիա"
+        },
+        "meridianUsername": {
+          "label": "Meridian Username (ոչ պարտադիր)",
+          "placeholder": "Ձեր Meridian username-ը"
+        },
+        "name": {
+          "label": "Անուն (ոչ պարտադիր)",
+          "placeholder": "Ձեր անունը"
+        },
+        "email": {
+          "label": "Էլ. հասցե",
+          "placeholder": "you@example.com"
+        },
+        "message": {
+          "label": "Հաղորդագրություն",
+          "placeholder": "Մանրամասն նկարագրեք ձեր խնդիրը"
+        },
+        "attachment": {
+          "label": "Screenshot / Կցորդ (ոչ պարտադիր)",
+          "hint": "Նկարներ կամ PDF, մինչև 5 ՄԲ։",
+          "remove": "Հեռացնել կցորդը"
+        }
       },
       "errors": {
         "emailRequired": "Խնդրում ենք մուտքագրել ձեր էլ. հասցեն։",
         "emailInvalid": "Խնդրում ենք մուտքագրել վավեր էլ. հասցե։",
         "messageRequired": "Խնդրում ենք մուտքագրել հաղորդագրություն։",
         "messageTooShort": "Հաղորդագրությունը պետք է լինի առնվազն {{count}} նիշ։",
-        "generic": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
+        "generic": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։",
+        "attachmentInvalidType": "Աջակցվում են միայն նկարներ (PNG, JPEG, WEBP) կամ PDF ֆայլեր։",
+        "attachmentTooLarge": "Կցորդը պետք է լինի 5 ՄԲ-ից փոքր։"
       },
       "submit": "Ուղարկել Ticket",
-      "submitting": "Ուղարկվում է..."
+      "submitting": "Ուղարկվում է...",
+      "loginHint": {
+        "text": "Meridian հաշի՞վ ունեք։",
+        "link": "Մուտք գործեք՝ ձեր տվյալներն ավտոմատ լրացնելու համար։"
+      },
+      "success": {
+        "heading": "Ձեր ticket-ը ստեղծվել է։",
+        "loggedInNote": "Կարող եք հետևել դրա կարգավիճակին և պատասխանել մեր թիմին ցանկացած պահի Իմ Ticket-երից։",
+        "anonymousNote": "Պահեք այս ticket ID-ն — քանի որ մուտք չեք գործել, մեր թիմը կհետևի email-ով։ Ցանկացած պահի ստեղծեք հաշիվ՝ ticket-երին Իմ Ticket-երից հետևելու համար։",
+        "viewTicket": "Դիտել Ticket-ը"
+      }
     },
     "detail": {
       "back": "Վերադառնալ Իմ Ticket-երին",
@@ -615,7 +863,8 @@
       "replyPlaceholder": "Գրեք պատասխան...",
       "replyError": "Ինչ-որ բան այն չէր պատասխանն ուղարկելիս։ Խնդրում ենք կրկին փորձել։",
       "reply": "Ուղարկել Պատասխան",
-      "sending": "Ուղարկվում է..."
+      "sending": "Ուղարկվում է...",
+      "attachment": "Դիտել կցորդը"
     }
   },
   "admin": {
@@ -649,7 +898,12 @@
       "replyPlaceholder": "Գրեք պատասխան հաճախորդին...",
       "replyError": "Ինչ-որ բան այն չէր պատասխանն ուղարկելիս։ Խնդրում ենք կրկին փորձել։",
       "reply": "Ուղարկել Պատասխան",
-      "sending": "Ուղարկվում է..."
+      "sending": "Ուղարկվում է...",
+      "reassign": {
+        "label": "Նշանակված է",
+        "unassigned": "Չնշանակված",
+        "you": "(դուք)"
+      }
     }
   },
   "aiChat": {
@@ -660,7 +914,8 @@
     "open": "Բացել chat-ը",
     "close": "Փակել chat-ը",
     "thinking": "Մտածում է...",
-    "error": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։"
+    "error": "Ինչ-որ բան այն չէր։ Խնդրում ենք կրկին փորձել։",
+    "contactSupport": "Դեռ օգնության կարի՞ք ունեք։ Կապվել Support-ի հետ"
   },
   "footer": {
     "telegram": "Telegram",

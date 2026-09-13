@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MessageCircle, X, Send, Bot, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { MessageCircle, X, Send, Bot, Loader2, LifeBuoy } from "lucide-react";
 import { AI_CHAT_API_URL } from "../config/links";
+import { useAIChat } from "../context/AIChatContext";
 
 function MessageBubble({ role, content }) {
   const isUser = role === "user";
@@ -22,7 +24,7 @@ function MessageBubble({ role, content }) {
 
 export default function AIChatWidget() {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useAIChat();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -139,6 +141,15 @@ export default function AIChatWidget() {
               <Send className="h-4 w-4" strokeWidth={2} />
             </button>
           </div>
+
+          <Link
+            to="/my-tickets/new"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center gap-1.5 border-t border-border-default bg-bg-secondary px-4 py-2.5 text-xs font-medium text-gold-primary transition-colors hover:text-gold-light"
+          >
+            <LifeBuoy className="h-3.5 w-3.5" strokeWidth={2} />
+            {t("aiChat.contactSupport")}
+          </Link>
         </div>
       )}
     </>

@@ -8,6 +8,8 @@ import { TICKET_STATUSES, categoryTranslationKey } from "../data/ticketOptions";
 import TicketMessageThread from "./TicketMessageThread";
 import TicketReplyForm from "./TicketReplyForm";
 
+const STAFF_ROLES = ["support", "admin"];
+
 function InfoRow({ label, value }) {
   if (!value) return null;
   return (
@@ -27,6 +29,7 @@ export default function AdminTicketDetail() {
   const [error, setError] = useState(false);
   const [statusUpdating, setStatusUpdating] = useState(false);
   const [assignUpdating, setAssignUpdating] = useState(false);
+  const [staff, setStaff] = useState(null);
 
   const loadTicket = useCallback(async () => {
     const [{ data: ticketData, error: ticketError }, { data: messageData, error: messageError }] =
@@ -52,6 +55,14 @@ export default function AdminTicketDetail() {
     loadTicket();
   }, [loadTicket]);
 
+  useEffect(() => {
+    supabase
+      .from("profiles")
+      .select("id, email, username, role")
+      .in("role", STAFF_ROLES)
+      .then(({ data }) => setStaff(data || []));
+  }, []);
+
   const handleStatusChange = async (event) => {
     const status = event.target.value;
     setStatusUpdating(true);
@@ -60,8 +71,8 @@ export default function AdminTicketDetail() {
     if (!updateError) setTicket((current) => ({ ...current, status }));
   };
 
-  const handleAssignToggle = async () => {
-    const assignedTo = ticket.assigned_to ? null : user.email;
+  const handleAssignChange = async (event) => {
+    const assignedTo = event.target.value || null;
     setAssignUpdating(true);
     const { error: updateError } = await supabase
       .from("tickets")
@@ -139,16 +150,26 @@ export default function AdminTicketDetail() {
                 </select>
               </div>
 
-              <button
-                type="button"
-                onClick={handleAssignToggle}
-                disabled={assignUpdating}
-                className="text-sm font-medium text-gold-primary transition-colors hover:text-gold-light disabled:opacity-60"
-              >
-                {ticket.assigned_to
-                  ? t("admin.detail.unassign", { name: ticket.assigned_to })
-                  : t("admin.detail.assignToMe")}
-              </button>
+              <div className="flex items-center gap-3">
+                <label htmlFor="ticket-assignee" className="text-sm font-medium text-text-main">
+                  {t("admin.detail.reassign.label")}
+                </label>
+                <select
+                  id="ticket-assignee"
+                  value={ticket.assigned_to || ""}
+                  onChange={handleAssignChange}
+                  disabled={assignUpdating || staff === null}
+                  className="rounded-md border border-border-default bg-bg-secondary px-3 py-2 text-sm text-text-main focus:border-gold-primary/50 focus:outline-none focus:ring-1 focus:ring-gold-primary/30 disabled:opacity-60"
+                >
+                  <option value="">{t("admin.detail.reassign.unassigned")}</option>
+                  {(staff || []).map((member) => (
+                    <option key={member.id} value={member.email}>
+                      {member.username || member.email}
+                      {member.id === user.id ? ` ${t("admin.detail.reassign.you")}` : ""}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <TicketMessageThread messages={messages} locale={locale} />
