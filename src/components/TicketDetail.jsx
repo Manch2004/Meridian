@@ -1,13 +1,58 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Copy, Check } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 import { categoryTranslationKey } from "../data/ticketOptions";
 import TicketStatusBadge from "./TicketStatusBadge";
 import TicketMessageThread from "./TicketMessageThread";
 import TicketReplyForm from "./TicketReplyForm";
 import SecurityNotice from "./SecurityNotice";
+
+function TicketIdBadge({ ticketId }) {
+  const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(ticketId);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-border-default bg-bg-secondary px-4 py-3">
+      <div className="min-w-0">
+        <p className="text-xs font-medium uppercase tracking-wide text-text-dim">
+          {t("myTickets.detail.idLabel")}
+        </p>
+        <p className="mt-0.5 truncate font-mono text-sm text-text-main">{ticketId}</p>
+      </div>
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label={t("myTickets.detail.copyId")}
+        title={t("myTickets.detail.copyId")}
+        className="inline-flex flex-shrink-0 items-center gap-1.5 rounded-md border border-gold-primary/30 bg-gold-primary/12 px-3 py-1.5 text-xs font-medium text-gold-primary transition-colors hover:bg-gold-primary/20"
+      >
+        {copied ? (
+          <>
+            <Check className="h-3.5 w-3.5" strokeWidth={2} />
+            {t("myTickets.detail.copied")}
+          </>
+        ) : (
+          <>
+            <Copy className="h-3.5 w-3.5" strokeWidth={2} />
+            {t("myTickets.detail.copyId")}
+          </>
+        )}
+      </button>
+    </div>
+  );
+}
 
 export default function TicketDetail() {
   const { t, i18n } = useTranslation();
@@ -83,6 +128,8 @@ export default function TicketDetail() {
                 day: "numeric",
               })}
             </p>
+
+            <TicketIdBadge ticketId={ticket.id} />
 
             <TicketMessageThread messages={messages} locale={locale} />
 

@@ -4,7 +4,7 @@
     "toggleMenu": "Toggle menu",
     "learnMore": "Learn More",
     "seeDetails": "See details",
-    "securityWarning": "Meridian staff will never ask for your password, private key, or seed phrase — not by email, not in a support ticket, not anywhere. Never share these with anyone."
+    "securityWarning": "Meridian staff will never ask for your password, private key, seed phrase, or access code — not by email, not in a support ticket, not anywhere. Never share these with anyone."
   },
   "header": {
     "logo": "Meridian",
@@ -864,7 +864,10 @@
       "replyError": "Something went wrong sending your reply. Please try again.",
       "reply": "Send Reply",
       "sending": "Sending...",
-      "attachment": "View attachment"
+      "attachment": "View attachment",
+      "idLabel": "Ticket ID",
+      "copyId": "Copy Ticket ID",
+      "copied": "Copied!"
     }
   },
   "admin": {

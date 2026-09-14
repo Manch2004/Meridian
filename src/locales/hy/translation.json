@@ -4,7 +4,7 @@
     "toggleMenu": "Բացել/փակել ընտրացանկը",
     "learnMore": "Իմանալ ավելին",
     "seeDetails": "Մանրամասներ",
-    "securityWarning": "Meridian-ի թիմը երբեք չի հարցնի ձեր password-ը, private key-ը կամ seed phrase-ը՝ ոչ email-ով, ոչ support ticket-ում, ոչ որևէ այլ տեղ։ Երբեք մի կիսվեք դրանցով ոչ ոքի հետ։"
+    "securityWarning": "Meridian-ի թիմը երբեք չի հարցնի ձեր password-ը, private key-ը, seed phrase-ը կամ access code-ը՝ ոչ email-ով, ոչ support ticket-ում, ոչ որևէ այլ տեղ։ Երբեք մի կիսվեք դրանցով ոչ ոքի հետ։"
   },
   "header": {
     "logo": "Meridian",
@@ -864,7 +864,10 @@
       "replyError": "Ինչ-որ բան այն չէր պատասխանն ուղարկելիս։ Խնդրում ենք կրկին փորձել։",
       "reply": "Ուղարկել Պատասխան",
       "sending": "Ուղարկվում է...",
-      "attachment": "Դիտել կցորդը"
+      "attachment": "Դիտել կցորդը",
+      "idLabel": "Ticket ID",
+      "copyId": "Կրկնօրինակել Ticket ID-ն",
+      "copied": "Կրկնօրինակված է!"
     }
   },
   "admin": {
