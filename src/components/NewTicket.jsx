@@ -155,18 +155,38 @@ function NewTicketForm() {
 
     const language = (i18n.resolvedLanguage || i18n.language || "en").slice(0, 2);
 
-    const { data: ticket, error: ticketError } = await supabase
-      .from("tickets")
-      .insert({
-        user_id: user?.id ?? null,
-        category: form.category,
-        meridian_username: form.meridianUsername.trim() || null,
-        name: form.name.trim() || null,
-        email: form.email.trim(),
-        language,
-      })
-      .select()
-      .single();
+    const ticketPayload = {
+      user_id: user?.id ?? null,
+      category: form.category,
+      meridian_username: form.meridianUsername.trim() || null,
+      name: form.name.trim() || null,
+      email: form.email.trim(),
+      language,
+    };
+
+    // Anonymous submitters have no SELECT policy on tickets (see schema.sql),
+    // so .insert().select() would fail on the RETURNING clause -- go through
+    // the create_anonymous_ticket RPC instead, which returns just the new id
+    // without needing a broad anon SELECT policy on the whole table.
+    let ticket;
+    let ticketError;
+    if (user) {
+      ({ data: ticket, error: ticketError } = await supabase
+        .from("tickets")
+        .insert(ticketPayload)
+        .select()
+        .single());
+    } else {
+      const { data: newTicketId, error } = await supabase.rpc("create_anonymous_ticket", {
+        p_category: ticketPayload.category,
+        p_email: ticketPayload.email,
+        p_meridian_username: ticketPayload.meridian_username,
+        p_name: ticketPayload.name,
+        p_language: ticketPayload.language,
+      });
+      ticket = newTicketId ? { id: newTicketId } : null;
+      ticketError = error;
+    }
 
     if (ticketError) {
       setStatus("error");
@@ -176,7 +196,11 @@ function NewTicketForm() {
 
     let attachmentUrl = null;
     if (form.attachment) {
-      attachmentUrl = await uploadAttachment(ticket.id, form.attachment);
+      try {
+        attachmentUrl = await uploadAttachment(ticket.id, form.attachment);
+      } catch {
+        attachmentUrl = null;
+      }
     }
 
     const { error: messageError } = await supabase.from("ticket_messages").insert({

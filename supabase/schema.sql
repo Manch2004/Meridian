@@ -320,6 +320,77 @@ with check (
   and assigned_to is null
 );
 
+-- Anonymous submissions need the new ticket's id back (for the success screen,
+-- the attachment upload path, and the opening ticket_messages row), but
+-- Supabase JS's .insert().select() issues an INSERT ... RETURNING, and
+-- RETURNING is filtered through SELECT policies just like a real SELECT --
+-- Postgres will silently drop (and, over the API, error on) any RETURNING
+-- row the caller has no SELECT policy for. Anon intentionally has no SELECT
+-- policy on tickets (an anonymous submitter can't read tickets back through
+-- this app at all, see the RLS section above), so a plain anon insert can
+-- never use .select().
+--
+-- Adding a broad anon SELECT policy to work around this would let any
+-- anonymous request read every ticket (name/email/category of every
+-- submitter), not just the one it just created -- RLS has no per-request
+-- concept of "the row I just inserted" to scope that to. Instead, this
+-- function performs the insert itself as a SECURITY DEFINER (bypassing RLS
+-- entirely for this one, narrowly-scoped operation, the same pattern used by
+-- handle_new_user/touch_ticket_on_new_message above) and returns just the
+-- new id. It hardcodes user_id/status/assigned_to itself rather than trusting
+-- caller input for them, so it needs no with_check-equivalent validation
+-- beyond the email check below.
+create or replace function public.create_anonymous_ticket(
+  p_category text,
+  p_email text,
+  p_meridian_username text default null,
+  p_name text default null,
+  p_language text default null
+)
+returns uuid
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  new_id uuid;
+begin
+  if p_email is null or length(trim(p_email)) = 0 then
+    raise exception 'email is required';
+  end if;
+
+  insert into public.tickets (user_id, category, meridian_username, name, email, language, status, assigned_to)
+  values (null, p_category, p_meridian_username, p_name, p_email, p_language, 'Open', null)
+  returning id into new_id;
+
+  return new_id;
+end;
+$$;
+
+revoke all on function public.create_anonymous_ticket(text, text, text, text, text) from public;
+grant execute on function public.create_anonymous_ticket(text, text, text, text, text) to anon;
+
+-- The anon ticket_messages/storage insert policies below need to check
+-- "does this ticket exist and have no owner" -- but a plain `exists (select
+-- 1 from public.tickets ...)` inside a policy runs as the anon role too, and
+-- anon has no SELECT policy on tickets (see create_anonymous_ticket above),
+-- so that subquery would always see zero rows regardless of the ticket's
+-- real state. security definer, same as is_staff() above, so the lookup
+-- itself bypasses RLS while the two callers below still only ever pass it
+-- the specific ticket_id they're trying to act on.
+create or replace function public.ticket_is_anonymous(p_ticket_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.tickets t
+    where t.id = p_ticket_id and t.user_id is null
+  );
+$$;
+
 drop policy if exists "users can view their own tickets" on public.tickets;
 create policy "users can view their own tickets"
 on public.tickets
@@ -392,10 +463,7 @@ for insert
 to anon
 with check (
   sender_type = 'user'
-  and exists (
-    select 1 from public.tickets t
-    where t.id = ticket_id and t.user_id is null
-  )
+  and public.ticket_is_anonymous(ticket_id)
 );
 
 -- ---------------------------------------------------------------------------
@@ -457,10 +525,7 @@ for insert
 to anon
 with check (
   bucket_id = 'ticket-attachments'
-  and exists (
-    select 1 from public.tickets t
-    where t.id::text = (storage.foldername(name))[1] and t.user_id is null
-  )
+  and public.ticket_is_anonymous(((storage.foldername(name))[1])::uuid)
 );
 
 -- ---------------------------------------------------------------------------
