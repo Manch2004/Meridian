@@ -47,6 +47,10 @@ export default function AIChatWidget() {
     setLoading(true);
     setError(false);
 
+    const assistantId = crypto.randomUUID();
+    let assistantStarted = false;
+    let streamFailed = false;
+
     try {
       const response = await fetch(`${AI_CHAT_API_URL}/api/chat`, {
         method: "POST",
@@ -54,13 +58,59 @@ export default function AIChatWidget() {
         body: JSON.stringify({ message: text, history }),
       });
 
-      if (!response.ok) throw new Error("Request failed");
+      if (!response.ok || !response.body) throw new Error("Request failed");
 
-      const data = await response.json();
-      setMessages((current) => [
-        ...current,
-        { id: crypto.randomUUID(), role: "assistant", content: data.reply },
-      ]);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let boundary = buffer.indexOf("\n\n");
+        while (boundary !== -1) {
+          const rawEvent = buffer.slice(0, boundary);
+          buffer = buffer.slice(boundary + 2);
+
+          let eventType = "message";
+          let dataLine = "";
+          for (const line of rawEvent.split("\n")) {
+            if (line.startsWith("event:")) eventType = line.slice(6).trim();
+            else if (line.startsWith("data:")) dataLine = line.slice(5).trim();
+          }
+
+          if (dataLine) {
+            const payload = JSON.parse(dataLine);
+
+            if (eventType === "delta" && typeof payload.text === "string") {
+              if (!assistantStarted) {
+                assistantStarted = true;
+                setLoading(false);
+                setMessages((current) => [
+                  ...current,
+                  { id: assistantId, role: "assistant", content: payload.text },
+                ]);
+              } else {
+                setMessages((current) =>
+                  current.map((message) =>
+                    message.id === assistantId
+                      ? { ...message, content: message.content + payload.text }
+                      : message,
+                  ),
+                );
+              }
+            } else if (eventType === "error") {
+              streamFailed = true;
+            }
+          }
+
+          boundary = buffer.indexOf("\n\n");
+        }
+      }
+
+      if (streamFailed && !assistantStarted) throw new Error("Stream failed");
     } catch {
       setError(true);
     } finally {
