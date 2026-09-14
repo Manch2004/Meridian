@@ -54,7 +54,7 @@ There is no test runner configured — do not assume `npm test` exists.
 
 Several things in this repo are intentionally temporary and are called out in code comments/README
 — don't "fix" them without checking with the user first:
-- `src/config/links.js`: Telegram URL and "Open App" URL are placeholders.
+- `src/config/links.js`: "Open App" URL is a placeholder (Telegram URL is now real).
 - `src/assets/logo.svg` and `public/favicon.svg`/`favicon.ico`: placeholder marks; `Header.jsx`
   deliberately renders a text wordmark instead of the logo until a real one exists.
 - `index.html`: Open Graph/Twitter meta tags reference `/og-image.png`, which doesn't exist yet.
