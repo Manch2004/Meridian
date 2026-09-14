@@ -158,7 +158,26 @@
     "wheel": {
       "heading": "Meridian Daily Wheel",
       "description": "Eligible users can spin the Wheel once a day for a chance at rewards, bonuses and other ecosystem benefits.",
-      "note": "Available rewards may evolve as the Meridian ecosystem grows."
+      "note": "Available rewards may evolve as the Meridian ecosystem grows.",
+      "steps": {
+        "logIn": {
+          "title": "Log In Daily",
+          "description": "Sign in to your Meridian account each day to stay eligible."
+        },
+        "spin": {
+          "title": "Spin Once a Day",
+          "description": "Use your one daily spin on the Wheel — no cost, no extra steps."
+        },
+        "reward": {
+          "title": "Receive Your Reward",
+          "description": "Whatever the Wheel lands on is credited to your account automatically."
+        },
+        "track": {
+          "title": "Track It In Points & Levels",
+          "description": "Everything you earn shows up in your Points & Levels overview."
+        }
+      },
+      "disclaimer": "The full list of rewards and how they're structured will be published closer to the Phase 2 launch. What you see here is the Wheel's interface — not final reward data."
     }
   },
   "pointsLevels": {
