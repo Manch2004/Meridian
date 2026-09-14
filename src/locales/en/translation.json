@@ -35,7 +35,9 @@
     "login": "Login",
     "signOut": "Sign Out",
     "myTickets": "My Tickets",
-    "admin": "Admin"
+    "admin": "Admin",
+    "account": "Account",
+    "signedInAs": "Signed in as"
   },
   "hero": {
     "headline": "Expert-Managed Investing in Digital Assets — Backed by Technology",

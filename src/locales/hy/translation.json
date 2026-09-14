@@ -11,7 +11,7 @@
     "nav": {
       "home": "Գլխավոր",
       "about": "Մեր մասին",
-      "faq": "ՀՏՀ",
+      "faq": "FAQ",
       "support": "Աջակցություն",
       "groups": {
         "howItWorks": "Ինչպես է աշխատում",
@@ -35,7 +35,9 @@
     "login": "Մուտք",
     "signOut": "Ելք",
     "myTickets": "Իմ Ticket-երը",
-    "admin": "Admin"
+    "admin": "Admin",
+    "account": "Հաշիվ",
+    "signedInAs": "Մուտք գործած է որպես"
   },
   "hero": {
     "headline": "Փորձագետների կողմից կառավարվող ներդրումներ՝ ապահովված տեխնոլոգիայով",

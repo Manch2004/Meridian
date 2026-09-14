@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut, Shield } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { OPEN_APP_URL } from "../config/links";
 import useAuth from "../hooks/useAuth";
@@ -60,45 +60,8 @@ function OpenAppButton({ className = "" }) {
   );
 }
 
-function HeaderAuthLinks({ className = "" }) {
+function LoginLink({ className = "" }) {
   const { t } = useTranslation();
-  const { user, loading } = useAuth();
-  const { profile } = useProfile();
-  const isStaff = Boolean(profile && STAFF_ROLES.includes(profile.role));
-
-  if (loading) return null;
-
-  if (user) {
-    return (
-      <div className={`flex items-center gap-3 ${className}`}>
-        {isStaff && (
-          <Link
-            to="/admin"
-            className="whitespace-nowrap text-sm text-text-dim transition-colors hover:text-text-main"
-          >
-            {t("header.admin")}
-          </Link>
-        )}
-        <Link
-          to="/my-tickets"
-          className="whitespace-nowrap text-sm text-text-dim transition-colors hover:text-text-main"
-        >
-          {t("header.myTickets")}
-        </Link>
-        <span className="max-w-[10rem] truncate text-sm text-text-dim" title={user.email}>
-          {user.email}
-        </span>
-        <button
-          type="button"
-          onClick={() => supabase.auth.signOut()}
-          className="text-sm text-text-dim transition-colors hover:text-text-main"
-        >
-          {t("header.signOut")}
-        </button>
-      </div>
-    );
-  }
-
   return (
     <Link
       to="/login"
@@ -106,6 +69,136 @@ function HeaderAuthLinks({ className = "" }) {
     >
       {t("header.login")}
     </Link>
+  );
+}
+
+function ProfileMenu({ user, isStaff }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onPointerDown = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) setOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const initial = user.email ? user.email[0].toUpperCase() : "?";
+
+  return (
+    <div className="relative" ref={rootRef}>
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-label={t("header.account")}
+        className="flex items-center gap-1.5 rounded-full border border-border-default py-1 pl-1 pr-2.5 text-text-main transition-colors hover:border-gold-primary/40"
+      >
+        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-gold-light to-gold-dark text-xs font-semibold text-bg-primary">
+          {initial}
+        </span>
+        <ChevronDown
+          className={`h-3.5 w-3.5 text-text-dim transition-transform duration-200 ${
+            open ? "rotate-180 text-gold-light" : ""
+          }`}
+          strokeWidth={2}
+        />
+      </button>
+
+      <div
+        role="menu"
+        className={`absolute right-0 top-full z-50 mt-3 w-64 rounded-md border border-border-default bg-bg-secondary/95 p-2 shadow-lg backdrop-blur-md transition-all duration-150 ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
+        }`}
+      >
+        <div className="border-b border-border-default px-3 pb-2.5 pt-1">
+          <p className="text-[0.65rem] uppercase tracking-wide text-text-dim">{t("header.signedInAs")}</p>
+          <p className="mt-0.5 truncate text-sm text-text-main" title={user.email}>
+            {user.email}
+          </p>
+        </div>
+        <div className="mt-1 flex flex-col">
+          {isStaff && (
+            <Link
+              to="/admin"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm text-text-dim transition-colors hover:bg-gold-primary/10 hover:text-gold-light"
+            >
+              <Shield className="h-4 w-4" strokeWidth={2} />
+              {t("header.admin")}
+            </Link>
+          )}
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              supabase.auth.signOut();
+            }}
+            className="flex items-center gap-2 rounded-sm px-3 py-2.5 text-left text-sm text-text-dim transition-colors hover:bg-red-500/10 hover:text-red-400"
+          >
+            <LogOut className="h-4 w-4" strokeWidth={2} />
+            {t("header.signOut")}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileProfileCard({ user, isStaff, onNavigate }) {
+  const { t } = useTranslation();
+  const initial = user.email ? user.email[0].toUpperCase() : "?";
+
+  return (
+    <div className="rounded-md border border-border-default bg-bg-card/60 p-3">
+      <div className="flex items-center gap-3">
+        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-light to-gold-dark text-sm font-semibold text-bg-primary">
+          {initial}
+        </span>
+        <div className="min-w-0">
+          <p className="text-[0.65rem] uppercase tracking-wide text-text-dim">{t("header.signedInAs")}</p>
+          <p className="truncate text-sm text-text-main" title={user.email}>
+            {user.email}
+          </p>
+        </div>
+      </div>
+      <div className="mt-3 flex flex-col gap-1 border-t border-border-default pt-2">
+        {isStaff && (
+          <Link
+            to="/admin"
+            onClick={onNavigate}
+            className="flex items-center gap-2 rounded-sm px-1 py-2 text-sm text-text-dim transition-colors hover:text-text-main"
+          >
+            <Shield className="h-4 w-4" strokeWidth={2} />
+            {t("header.admin")}
+          </Link>
+        )}
+        <button
+          type="button"
+          onClick={() => {
+            onNavigate();
+            supabase.auth.signOut();
+          }}
+          className="flex items-center gap-2 rounded-sm px-1 py-2 text-left text-sm text-text-dim transition-colors hover:text-red-400"
+        >
+          <LogOut className="h-4 w-4" strokeWidth={2} />
+          {t("header.signOut")}
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -221,6 +314,9 @@ export default function Header() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, loading: authLoading } = useAuth();
+  const { profile } = useProfile();
+  const isStaff = Boolean(profile && STAFF_ROLES.includes(profile.role));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -268,10 +364,15 @@ export default function Header() {
               <DesktopNavGroup key={entry.key} group={entry} isActive={isGroupActive(entry)} />
             ),
           )}
+          {user && (
+            <NavLink to="/my-tickets" className={navLinkClassName}>
+              {t("header.myTickets")}
+            </NavLink>
+          )}
         </nav>
 
         <div className="hidden items-center gap-4 xl:flex">
-          <HeaderAuthLinks />
+          {!authLoading && (user ? <ProfileMenu user={user} isStaff={isStaff} /> : <LoginLink />)}
           <LanguageSwitcher />
           <OpenAppButton />
         </div>
@@ -318,9 +419,27 @@ export default function Header() {
                 />
               ),
             )}
+            {user && (
+              <NavLink
+                to="/my-tickets"
+                onClick={() => setMenuOpen(false)}
+                className={mobileNavLinkClassName}
+              >
+                {t("header.myTickets")}
+              </NavLink>
+            )}
           </nav>
-          <div className="mt-6 flex flex-col gap-4">
-            <HeaderAuthLinks />
+          <div className="mt-6 flex flex-col gap-4 border-t border-border-default pt-6">
+            {!authLoading &&
+              (user ? (
+                <MobileProfileCard
+                  user={user}
+                  isStaff={isStaff}
+                  onNavigate={() => setMenuOpen(false)}
+                />
+              ) : (
+                <LoginLink className="text-base" />
+              ))}
             <div className="flex items-center justify-between">
               <LanguageSwitcher />
               <OpenAppButton />
